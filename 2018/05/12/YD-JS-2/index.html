@@ -68,32 +68,31 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-  
-
-
-  <link rel="alternate" href="/atom.xml" title="笔记" type="application/atom+xml" />
+  <meta name="keywords" content="js," />
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="DanielDemi" type="application/atom+xml" />
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+
+
+
+
+
+<meta name="description" content="1.toSring()/1.toFixed(3)等这些为什么执行会报错？想要知道为什么，那么首先我们就必须清楚number这一类 123a = 4b = 4.0c = 4. 这三个都可以表示为数字4所以1.toString()的问题出在1.的解析上面;再如下代码应该会清楚点了 12341.toSring() // 报错a = 1a.toString() // &quot;1&quot;1.1.toString() /">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/05/07/hello-world/index.html">
-<meta property="og:site_name" content="笔记">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:title" content="你不知道的JS系列（二）">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/YD-JS-2/index.html">
+<meta property="og:site_name" content="DanielDemi">
+<meta property="og:description" content="1.toSring()/1.toFixed(3)等这些为什么执行会报错？想要知道为什么，那么首先我们就必须清楚number这一类 123a = 4b = 4.0c = 4. 这三个都可以表示为数字4所以1.toString()的问题出在1.的解析上面;再如下代码应该会清楚点了 12341.toSring() // 报错a = 1a.toString() // &quot;1&quot;1.1.toString() /">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-07T14:50:52.169Z">
+<meta property="og:updated_time" content="2018-05-12T07:14:31.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="你不知道的JS系列（二）">
+<meta name="twitter:description" content="1.toSring()/1.toFixed(3)等这些为什么执行会报错？想要知道为什么，那么首先我们就必须清楚number这一类 123a = 4b = 4.0c = 4. 这三个都可以表示为数字4所以1.toString()的问题出在1.的解析上面;再如下代码应该会清楚点了 12341.toSring() // 报错a = 1a.toString() // &quot;1&quot;1.1.toString() /">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/07/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/YD-JS-2/"/>
 
 
 
 
 
-  <title>Hello World | 笔记</title>
+  <title>你不知道的JS系列（二） | DanielDemi</title>
   
 
 
@@ -150,7 +149,6 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -159,12 +157,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">笔记</span>
+        <span class="site-title">DanielDemi</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">记录</p>
+        <p class="site-subtitle">生活</p>
       
   </div>
 
@@ -194,12 +192,42 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-livies">
+          <a href="/livies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            生活
           </a>
         </li>
       
@@ -236,16 +264,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/07/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/YD-JS-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记">
+      <meta itemprop="name" content="DanielDemi">
     </span>
 
     
@@ -253,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">你不知道的JS系列（二）</h1>
         
 
         <div class="post-meta">
@@ -265,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T22:50:52+08:00">
-                2018-05-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:37:39+08:00">
+                2018-05-12
               </time>
             
 
@@ -275,6 +303,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -303,15 +353,13 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
+<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
+<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+<p>综上已解释了1.toString()为什么会报错的原因</p>
 
       
     </div>
@@ -327,11 +375,37 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
 
       
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/YD-JS-3/" rel="next" title="你不知道的JS系列（三）">
+                <i class="fa fa-chevron-left"></i> 你不知道的JS系列（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/categories/" rel="prev" title="categories">
+                categories <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -394,6 +468,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="DanielDemi" />
+            
               <p class="site-author-name" itemprop="name">DanielDemi</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -405,14 +483,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
@@ -449,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？"><span class="nav-number">1.</span> <span class="nav-text">1.toSring()/1.toFixed(3)等这些为什么执行会报错？</span></a></li></ol></div>
             
 
           </div>
@@ -479,15 +575,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
