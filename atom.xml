@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-14T14:55:50.622Z</updated>
+  <updated>2018-05-14T15:30:27.767Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/05/14/canvas-time/"/>
     <id>http://yoursite.com/2018/05/14/canvas-time/</id>
     <published>2018-05-14T14:47:20.000Z</published>
-    <updated>2018-05-14T14:55:50.622Z</updated>
+    <updated>2018-05-14T15:30:27.767Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="这是一个canvas制作的数字时间表"><a href="#这是一个canvas制作的数字时间表" class="headerlink" title="这是一个canvas制作的数字时间表"></a>这是一个canvas制作的数字时间表</h1><p>比较简单只是用于练习canvas API<br>点这里看<a href="https://github.com/DanielDemi/base-demos" target="_blank" rel="noopener">源码</a></p><iframe src="http://danieldemi.com/base-demos/canvas/time" width="800" height="250" frameborder="0"></iframe>]]></content>
+    <content type="html"><![CDATA[<h1 id="这是一个canvas制作的数字时间表"><a href="#这是一个canvas制作的数字时间表" class="headerlink" title="这是一个canvas制作的数字时间表"></a>这是一个canvas制作的数字时间表</h1><p>比较简单只是用于练习canvas API<br>点这里看<a href="https://github.com/DanielDemi/base-demos" target="_blank" rel="noopener">源码</a></p><iframe src="http://danieldemi.com/base-demos/canvas/time" width="800" height="250" frameborder="0" scrolling="0"></iframe>]]></content>
     
     <summary type="html">
     
