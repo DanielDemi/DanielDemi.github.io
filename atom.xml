@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-12T07:16:29.142Z</updated>
+  <updated>2018-05-14T14:55:50.622Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,43 +17,27 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>categories</title>
-    <link href="http://yoursite.com/2018/05/12/categories/"/>
-    <id>http://yoursite.com/2018/05/12/categories/</id>
-    <published>2018-05-12T07:16:29.000Z</published>
-    <updated>2018-05-12T07:16:29.142Z</updated>
+    <title>canvas-时间</title>
+    <link href="http://yoursite.com/2018/05/14/canvas-time/"/>
+    <id>http://yoursite.com/2018/05/14/canvas-time/</id>
+    <published>2018-05-14T14:47:20.000Z</published>
+    <updated>2018-05-14T14:55:50.622Z</updated>
     
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="centOS" scheme="http://yoursite.com/tags/centOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>你不知道的JS系列（一）</title>
-    <link href="http://yoursite.com/2018/05/12/YD-JS-1/"/>
-    <id>http://yoursite.com/2018/05/12/YD-JS-1/</id>
-    <published>2018-05-12T05:37:39.000Z</published>
-    <updated>2018-05-12T07:14:34.957Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="这是一个canvas制作的数字时间表"><a href="#这是一个canvas制作的数字时间表" class="headerlink" title="这是一个canvas制作的数字时间表"></a>这是一个canvas制作的数字时间表</h1><p>比较简单只是用于练习canvas API<br>点这里看<a href="https://github.com/DanielDemi/base-demos" target="_blank" rel="noopener">源码</a></p><iframe src="http://danieldemi.com/base-demos/canvas/time" width="800" height="250" frameborder="0"></iframe>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
+        &lt;h1 id=&quot;这是一个canvas制作的数字时间表&quot;&gt;&lt;a href=&quot;#这是一个canvas制作的数字时间表&quot; class=&quot;headerlink&quot; title=&quot;这是一个canvas制作的数字时间表&quot;&gt;&lt;/a&gt;这是一个canvas制作的数字时间表&lt;/h1&gt;&lt;p&gt;比较简单只是
       
     
     </summary>
     
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+      <category term="canvas" scheme="http://yoursite.com/categories/canvas/"/>
     
     
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+      <category term="canvas" scheme="http://yoursite.com/tags/canvas/"/>
     
   </entry>
   
@@ -71,6 +55,31 @@
       
       
         &lt;h2 id=&quot;1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot;&gt;&lt;a href=&quot;#1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot; class=&quot;headerlink&quot; title=&quot;1.toSring()/1.toFixed(3)
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的JS系列（一）</title>
+    <link href="http://yoursite.com/2018/05/12/YD-JS-1/"/>
+    <id>http://yoursite.com/2018/05/12/YD-JS-1/</id>
+    <published>2018-05-12T05:37:39.000Z</published>
+    <updated>2018-05-14T14:47:58.565Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
       
     
     </summary>
