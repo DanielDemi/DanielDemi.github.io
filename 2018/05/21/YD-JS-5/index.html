@@ -68,12 +68,10 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="js," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="DanielDemi" type="application/atom+xml" />
@@ -83,17 +81,18 @@
 
 
 
-<meta name="description" content="该博客主要用于记录生活和技术点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="1.js本身是不支持异步的机制的，只是浏览器解析制作的2.异步最常见的就是回调函数，这边就需要理解一下事件轮询和队列；所谓的事件轮询就是把到该运行该语句的时候，把该语句push到事件轮询机制里，事件轮询按照先后顺序就行运行,所以使用settimeout()并不能十分精确地计时，因为如果时间到了，事件轮询队列里还有其他待运行的，那么运行时间就会出现偏差。3.generator(迭代器) 一个可以按照">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你不知道的JS系列（五）">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/YD-JS-5/index.html">
 <meta property="og:site_name" content="DanielDemi">
-<meta property="og:description" content="该博客主要用于记录生活和技术点">
+<meta property="og:description" content="1.js本身是不支持异步的机制的，只是浏览器解析制作的2.异步最常见的就是回调函数，这边就需要理解一下事件轮询和队列；所谓的事件轮询就是把到该运行该语句的时候，把该语句push到事件轮询机制里，事件轮询按照先后顺序就行运行,所以使用settimeout()并不能十分精确地计时，因为如果时间到了，事件轮询队列里还有其他待运行的，那么运行时间就会出现偏差。3.generator(迭代器) 一个可以按照">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-12T07:40:40.840Z">
+<meta property="og:updated_time" content="2018-05-21T14:59:48.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="该博客主要用于记录生活和技术点">
+<meta name="twitter:title" content="你不知道的JS系列（五）">
+<meta name="twitter:description" content="1.js本身是不支持异步的机制的，只是浏览器解析制作的2.异步最常见的就是回调函数，这边就需要理解一下事件轮询和队列；所谓的事件轮询就是把到该运行该语句的时候，把该语句push到事件轮询机制里，事件轮询按照先后顺序就行运行,所以使用settimeout()并不能十分精确地计时，因为如果时间到了，事件轮询队列里还有其他待运行的，那么运行时间就会出现偏差。3.generator(迭代器) 一个可以按照">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/YD-JS-5/"/>
 
 
 
 
 
-  <title>关于 | DanielDemi</title>
+  <title>你不知道的JS系列（五） | DanielDemi</title>
   
 
 
@@ -253,34 +252,173 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/YD-JS-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>该博客主要用于记录生活和技术点</p>
-
+          <h1 class="post-title" itemprop="name headline">你不知道的JS系列（五）</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T22:58:34+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>1.js本身是不支持异步的机制的，只是浏览器解析制作的<br>2.异步最常见的就是回调函数，这边就需要理解一下事件轮询和队列；<br>所谓的事件轮询就是把到该运行该语句的时候，把该语句push到事件轮询机制里，<br>事件轮询按照先后顺序就行运行,所以使用settimeout()并不能十分精确地计时，<br>因为如果时间到了，事件轮询队列里还有其他待运行的，那么运行时间就会出现偏差。<br>3.generator(迭代器) 一个可以按照想要的顺序进行执行语句<br>迭代器写法：function <em>name() {}<br>通过在迭代器内部写yield来做语句运行的截止点<br>通过next来启用程序<br>以下为demo: </em>foo迭代器，it1和it2是迭代器实例（一开始是不会运行的，只有当next才会运行）,<br>yield可以喝语句进行互动，yeild后面的字段会被next()运行停止后解析;(形成互动)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function *foo() &#123;</span><br><span class="line">	var x = yield 2;</span><br><span class="line">	z++;</span><br><span class="line">	var y = yield (x * z);</span><br><span class="line">	console.log( x, y, z );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var z = 1;</span><br><span class="line"></span><br><span class="line">var it1 = foo();</span><br><span class="line">var it2 = foo();</span><br><span class="line"></span><br><span class="line">var val1 = it1.next().value;			// 2 &lt;-- 让出2</span><br><span class="line">var val2 = it2.next().value;			// 2 &lt;-- 让出2</span><br><span class="line"></span><br><span class="line">val1 = it1.next( val2 * 10 ).value;		// 40  &lt;-- x:20,  z:2</span><br><span class="line">val2 = it2.next( val1 * 5 ).value;		// 600 &lt;-- x:200, z:3</span><br><span class="line"></span><br><span class="line">it1.next( val2 / 2 );					// y:300</span><br><span class="line">										// 20 300 3</span><br><span class="line">it2.next( val1 / 4 );					// y:10</span><br><span class="line">										// 200 10 3</span><br></pre></td></tr></table></figure></p>
+<p>另外可通过[Symbol.iterator]制造迭代器<br>var a = [1,3,5,7,9];</p>
+<p>var it = a<a href="">Symbol.iterator</a>;</p>
+<p>it.next().value;    // 1<br>it.next().value;    // 3<br>it.next().value;    // 5<br>..</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/YD-JS-4/" rel="next" title="你不知道的JS系列（四）">
+                <i class="fa fa-chevron-left"></i> 你不知道的JS系列（四）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/21/canvas-1/" rel="prev" title="canvas注意事项">
+                canvas注意事项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
