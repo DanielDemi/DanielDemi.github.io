@@ -145,31 +145,6 @@
   </entry>
   
   <entry>
-    <title>你不知道的JS系列（三）</title>
-    <link href="http://yoursite.com/2018/05/12/YD-JS-3/"/>
-    <id>http://yoursite.com/2018/05/12/YD-JS-3/</id>
-    <published>2018-05-12T05:37:39.000Z</published>
-    <updated>2018-05-12T07:14:32.972Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;parseInt-1-0-19-答案是18；是不是很神奇？&quot;&gt;&lt;a href=&quot;#parseInt-1-0-19-答案是18；是不是很神奇？&quot; class=&quot;headerlink&quot; title=&quot;parseInt(1/0, 19) 答案是18；是不是很神奇？&quot;&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>你不知道的JS系列（二）</title>
     <link href="http://yoursite.com/2018/05/12/YD-JS-2/"/>
     <id>http://yoursite.com/2018/05/12/YD-JS-2/</id>
@@ -183,6 +158,31 @@
       
       
         &lt;h2 id=&quot;1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot;&gt;&lt;a href=&quot;#1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot; class=&quot;headerlink&quot; title=&quot;1.toSring()/1.toFixed(3)
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的JS系列（三）</title>
+    <link href="http://yoursite.com/2018/05/12/YD-JS-3/"/>
+    <id>http://yoursite.com/2018/05/12/YD-JS-3/</id>
+    <published>2018-05-12T05:37:39.000Z</published>
+    <updated>2018-05-12T07:14:32.972Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;parseInt-1-0-19-答案是18；是不是很神奇？&quot;&gt;&lt;a href=&quot;#parseInt-1-0-19-答案是18；是不是很神奇？&quot; class=&quot;headerlink&quot; title=&quot;parseInt(1/0, 19) 答案是18；是不是很神奇？&quot;&gt;&lt;
       
     
     </summary>
