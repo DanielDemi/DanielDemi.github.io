@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="##1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); ##2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document">
+<meta name="description" content="1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); 2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document ===">
 <meta name="keywords" content="jquery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/learn-jquery-1/index.html">
 <meta property="og:site_name" content="DanielDemi">
-<meta property="og:description" content="##1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); ##2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document">
+<meta property="og:description" content="1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); 2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document ===">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T14:04:44.074Z">
+<meta property="og:updated_time" content="2018-05-22T14:07:08.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）">
-<meta name="twitter:description" content="##1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); ##2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document">
+<meta name="twitter:description" content="1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); 2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document ===">
 
 
 
@@ -353,13 +353,12 @@
       
 
       
-        <p>##1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function( window, undefined ) &#123;</span><br><span class="line">    // 内容</span><br><span class="line">&#125;)( window );</span><br></pre></td></tr></table></figure></p>
-<p>##2. 如何对外暴露jquery呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( typeof window === &quot;object&quot; &amp;&amp; typeof window.document === &quot;object&quot; ) &#123;</span><br><span class="line">    window.jQuery = window.$ = jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="1-jquery-最外面有立即执行函数-防止污染，防止代码冲突"><a href="#1-jquery-最外面有立即执行函数-防止污染，防止代码冲突" class="headerlink" title="1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)"></a>1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function( window, undefined ) &#123;</span><br><span class="line">    // 内容</span><br><span class="line">&#125;)( window );</span><br></pre></td></tr></table></figure>
+<h2 id="2-如何对外暴露jquery呢？"><a href="#2-如何对外暴露jquery呢？" class="headerlink" title="2. 如何对外暴露jquery呢？"></a>2. 如何对外暴露jquery呢？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( typeof window === &quot;object&quot; &amp;&amp; typeof window.document === &quot;object&quot; ) &#123;</span><br><span class="line">    window.jQuery = window.$ = jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>jquery通过把jQuery和$挂在到window上，那么就可以使用了。</p>
-<p>##3.如何避免冲突呢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">_jQuery = window.jQuery,</span><br><span class="line"></span><br><span class="line">// Map over the $ in case of overwrite</span><br><span class="line">_$ = window.$,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noConflict: function( deep ) &#123;</span><br><span class="line">    if ( window.$ === jQuery ) &#123;</span><br><span class="line">        window.$ = _$;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ( deep &amp;&amp; window.jQuery === jQuery ) &#123;</span><br><span class="line">        window.jQuery = _jQuery;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-如何避免冲突呢"><a href="#3-如何避免冲突呢" class="headerlink" title="3.如何避免冲突呢"></a>3.如何避免冲突呢</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">_jQuery = window.jQuery,</span><br><span class="line"></span><br><span class="line">// Map over the $ in case of overwrite</span><br><span class="line">_$ = window.$,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noConflict: function( deep ) &#123;</span><br><span class="line">    if ( window.$ === jQuery ) &#123;</span><br><span class="line">        window.$ = _$;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ( deep &amp;&amp; window.jQuery === jQuery ) &#123;</span><br><span class="line">        window.jQuery = _jQuery;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过一开始保留全局变量，最后在通过noConflict来改变jquery命名</p>
-<p>##整理架构划分： （jquery是面向对象的）</p>
-<ol>
+<h2 id="整理架构划分：-（jquery是面向对象的）"><a href="#整理架构划分：-（jquery是面向对象的）" class="headerlink" title="整理架构划分： （jquery是面向对象的）"></a>整理架构划分： （jquery是面向对象的）</h2><ol>
 <li>(21-94)行：定义了一些变量和函数 jQuery = function() {}</li>
 <li>(96-283)行: 定义了jquery的原型jQuery.fn = jQuery.prototype（fn即代表原型） 即给jQuery添加一些方法和属性</li>
 <li>(285-347)行: extend: jQuery的继承方法（可用于插件和方法的扩展）</li>
@@ -470,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -542,6 +550,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-jquery-最外面有立即执行函数-防止污染，防止代码冲突"><span class="nav-number">1.</span> <span class="nav-text">1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何对外暴露jquery呢？"><span class="nav-number">2.</span> <span class="nav-text">2. 如何对外暴露jquery呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-如何避免冲突呢"><span class="nav-number">3.</span> <span class="nav-text">3.如何避免冲突呢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整理架构划分：-（jquery是面向对象的）"><span class="nav-number">4.</span> <span class="nav-text">整理架构划分： （jquery是面向对象的）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
