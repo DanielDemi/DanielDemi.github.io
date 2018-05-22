@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-21T15:02:29.342Z</updated>
+  <updated>2018-05-22T14:01:29.767Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）</title>
+    <link href="http://yoursite.com/2018/05/22/learn-jquery-1/"/>
+    <id>http://yoursite.com/2018/05/22/learn-jquery-1/</id>
+    <published>2018-05-22T12:13:29.000Z</published>
+    <updated>2018-05-22T14:01:29.767Z</updated>
+    
+    <content type="html"><![CDATA[<p>#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function( window, undefined ) &#123;</span><br><span class="line">    // 内容</span><br><span class="line">&#125;)( window );</span><br></pre></td></tr></table></figure></p><p>#2. 如何对外暴露jquery呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( typeof window === &quot;object&quot; &amp;&amp; typeof window.document === &quot;object&quot; ) &#123;</span><br><span class="line">    window.jQuery = window.$ = jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>jquery通过把jQuery和$挂在到window上，那么就可以使用了。</p><p>#3.如何避免冲突呢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">_jQuery = window.jQuery,</span><br><span class="line"></span><br><span class="line">// Map over the $ in case of overwrite</span><br><span class="line">_$ = window.$,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noConflict: function( deep ) &#123;</span><br><span class="line">    if ( window.$ === jQuery ) &#123;</span><br><span class="line">        window.$ = _$;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ( deep &amp;&amp; window.jQuery === jQuery ) &#123;</span><br><span class="line">        window.jQuery = _jQuery;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>通过一开始保留全局变量，最后在通过noConflict来改变jquery命名</p><p>#整理架构划分： （jquery是面向对象的）</p><ol><li>(21-94)行：定义了一些变量和函数 jQuery = function() {}</li><li>(96-283)行: 定义了jquery的原型jQuery.fn = jQuery.prototype（fn即代表原型） 即给jQuery添加一些方法和属性</li><li>(285-347)行: extend: jQuery的继承方法（可用于插件和方法的扩展）</li><li>(349-817)行：jQuery.extend(): 扩展一些工具方法（静态方法和静态属性）</li><li>(877, 2856)行：sizzlejs选择器的实现（如$(‘ul li .div&gt;sd’)）,jQuery的核心，可单独使用（在官网直接下载sizzlejs）</li><li>(2880, 3042)行: Callbacks: 回调对象：对函数的统一管理</li><li>(3043, 3183)行：Deferred: 延迟对象，对异步的统一管理（定时器，dom加载结束，ajax等异步）</li><li>(3184, 3295)行：support: 功能检测</li><li>(3308, 3652)行：data(): 数据缓存 </li><li>(3653, 3797)行：queue(): 队列管理 (animate就使用了queue)</li><li>(3803, 4299)行：attr(), prop(), val(), addClass()等，对元素属性的操作</li><li>(4300, 5128)行：on(), trigger()： 事件操作相关方法 </li><li>(5140, 6057)行：dom操作： 添加 删除 获取 包装 等</li><li>(6058, 6620)行：css(): 样式操作 </li><li>(6621, 7854)行：提交数据和ajax()： ajax(), load(), getJson()等</li><li>(7855, 8584)行: animate(): 运动方法</li><li>(8585, 8792)行：offset(): 位置和尺寸的方法</li><li>(8804, 8821)行：jQ支持模块化的模式</li><li>(8826) window.jQuery = window.$ = jQuery</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="jquery" scheme="http://yoursite.com/categories/jquery/"/>
+    
+    
+      <category term="jquery" scheme="http://yoursite.com/tags/jquery/"/>
+    
+  </entry>
   
   <entry>
     <title>canvas注意事项</title>
@@ -120,31 +145,6 @@
   </entry>
   
   <entry>
-    <title>你不知道的JS系列（一）</title>
-    <link href="http://yoursite.com/2018/05/12/YD-JS-1/"/>
-    <id>http://yoursite.com/2018/05/12/YD-JS-1/</id>
-    <published>2018-05-12T05:37:39.000Z</published>
-    <updated>2018-05-14T14:47:58.565Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
-      
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>你不知道的JS系列（二）</title>
     <link href="http://yoursite.com/2018/05/12/YD-JS-2/"/>
     <id>http://yoursite.com/2018/05/12/YD-JS-2/</id>
@@ -158,6 +158,31 @@
       
       
         &lt;h2 id=&quot;1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot;&gt;&lt;a href=&quot;#1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot; class=&quot;headerlink&quot; title=&quot;1.toSring()/1.toFixed(3)
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的JS系列（一）</title>
+    <link href="http://yoursite.com/2018/05/12/YD-JS-1/"/>
+    <id>http://yoursite.com/2018/05/12/YD-JS-1/</id>
+    <published>2018-05-12T05:37:39.000Z</published>
+    <updated>2018-05-14T14:47:58.565Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
       
     
     </summary>

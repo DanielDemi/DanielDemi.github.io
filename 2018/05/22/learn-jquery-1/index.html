@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="jquery," />
 
 
 
@@ -81,19 +81,18 @@
 
 
 
-<meta name="description" content="这边用于记录生活的点滴那些年我们毕业啦">
-<meta property="og:type" content="website">
-<meta property="og:title" content="生活">
-<meta property="og:url" content="http://yoursite.com/livies/index.html">
+<meta name="description" content="#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); #2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document =">
+<meta name="keywords" content="jquery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/learn-jquery-1/index.html">
 <meta property="og:site_name" content="DanielDemi">
-<meta property="og:description" content="这边用于记录生活的点滴那些年我们毕业啦">
+<meta property="og:description" content="#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); #2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document =">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/biye.jpg">
-<meta property="og:updated_time" content="2018-05-12T09:39:58.047Z">
+<meta property="og:updated_time" content="2018-05-22T14:01:29.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生活">
-<meta name="twitter:description" content="这边用于记录生活的点滴那些年我们毕业啦">
-<meta name="twitter:image" content="http://yoursite.com/images/biye.jpg">
+<meta name="twitter:title" content="学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）">
+<meta name="twitter:description" content="#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)123(function( window, undefined ) &amp;#123;    // 内容&amp;#125;)( window ); #2. 如何对外暴露jquery呢？123if ( typeof window === &amp;quot;object&amp;quot; &amp;amp;&amp;amp; typeof window.document =">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/livies/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/learn-jquery-1/"/>
 
 
 
 
 
-  <title>生活 | DanielDemi</title>
+  <title>学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8） | DanielDemi</title>
   
 
 
@@ -253,34 +252,192 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/learn-jquery-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">生活</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>这边用于记录生活的点滴<br>那些年我们毕业啦<br><img src="/images/biye.jpg" alt="Alt text"></p>
-
+          <h1 class="post-title" itemprop="name headline">学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T20:13:29+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>#1. jquery 最外面有立即执行函数(防止污染，防止代码冲突)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function( window, undefined ) &#123;</span><br><span class="line">    // 内容</span><br><span class="line">&#125;)( window );</span><br></pre></td></tr></table></figure></p>
+<p>#2. 如何对外暴露jquery呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ( typeof window === &quot;object&quot; &amp;&amp; typeof window.document === &quot;object&quot; ) &#123;</span><br><span class="line">    window.jQuery = window.$ = jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>jquery通过把jQuery和$挂在到window上，那么就可以使用了。</p>
+<p>#3.如何避免冲突呢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">_jQuery = window.jQuery,</span><br><span class="line"></span><br><span class="line">// Map over the $ in case of overwrite</span><br><span class="line">_$ = window.$,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noConflict: function( deep ) &#123;</span><br><span class="line">    if ( window.$ === jQuery ) &#123;</span><br><span class="line">        window.$ = _$;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ( deep &amp;&amp; window.jQuery === jQuery ) &#123;</span><br><span class="line">        window.jQuery = _jQuery;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过一开始保留全局变量，最后在通过noConflict来改变jquery命名</p>
+<p>#整理架构划分： （jquery是面向对象的）</p>
+<ol>
+<li>(21-94)行：定义了一些变量和函数 jQuery = function() {}</li>
+<li>(96-283)行: 定义了jquery的原型jQuery.fn = jQuery.prototype（fn即代表原型） 即给jQuery添加一些方法和属性</li>
+<li>(285-347)行: extend: jQuery的继承方法（可用于插件和方法的扩展）</li>
+<li>(349-817)行：jQuery.extend(): 扩展一些工具方法（静态方法和静态属性）</li>
+<li>(877, 2856)行：sizzlejs选择器的实现（如$(‘ul li .div&gt;sd’)）,jQuery的核心，可单独使用（在官网直接下载sizzlejs）</li>
+<li>(2880, 3042)行: Callbacks: 回调对象：对函数的统一管理</li>
+<li>(3043, 3183)行：Deferred: 延迟对象，对异步的统一管理（定时器，dom加载结束，ajax等异步）</li>
+<li>(3184, 3295)行：support: 功能检测</li>
+<li>(3308, 3652)行：data(): 数据缓存 </li>
+<li>(3653, 3797)行：queue(): 队列管理 (animate就使用了queue)</li>
+<li>(3803, 4299)行：attr(), prop(), val(), addClass()等，对元素属性的操作</li>
+<li>(4300, 5128)行：on(), trigger()： 事件操作相关方法 </li>
+<li>(5140, 6057)行：dom操作： 添加 删除 获取 包装 等</li>
+<li>(6058, 6620)行：css(): 样式操作 </li>
+<li>(6621, 7854)行：提交数据和ajax()： ajax(), load(), getJson()等</li>
+<li>(7855, 8584)行: animate(): 运动方法</li>
+<li>(8585, 8792)行：offset(): 位置和尺寸的方法</li>
+<li>(8804, 8821)行：jQ支持模块化的模式</li>
+<li>(8826) window.jQuery = window.$ = jQuery</li>
+</ol>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/canvas-1/" rel="next" title="canvas注意事项">
+                <i class="fa fa-chevron-left"></i> canvas注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
