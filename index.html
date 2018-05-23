@@ -1011,7 +1011,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/YD-JS-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/YD-JS-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
@@ -1030,7 +1030,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
+                <a class="post-title-link" href="/2018/05/12/YD-JS-3/" itemprop="url">你不知道的JS系列（三）</a></h1>
         
 
         <div class="post-meta">
@@ -1104,13 +1104,7 @@
       
         
           
-            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
-<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
-<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
-<p>综上已解释了1.toString()为什么会报错的原因</p>
+            <h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>
 
           
         
@@ -1306,7 +1300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/YD-JS-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/YD-JS-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
@@ -1325,7 +1319,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/12/YD-JS-3/" itemprop="url">你不知道的JS系列（三）</a></h1>
+                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
         
 
         <div class="post-meta">
@@ -1399,7 +1393,13 @@
       
         
           
-            <h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>
+            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
+<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
+<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+<p>综上已解释了1.toString()为什么会报错的原因</p>
 
           
         
@@ -1569,6 +1569,26 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
 
 
