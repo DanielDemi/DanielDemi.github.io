@@ -144,31 +144,6 @@
   </entry>
   
   <entry>
-    <title>你不知道的JS系列（一）</title>
-    <link href="http://danieldemi.com/2018/05/12/YD-JS-1/"/>
-    <id>http://danieldemi.com/2018/05/12/YD-JS-1/</id>
-    <published>2018-05-12T05:37:39.000Z</published>
-    <updated>2018-05-22T14:07:06.354Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
-      
-    
-    </summary>
-    
-      <category term="js" scheme="http://danieldemi.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://danieldemi.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>你不知道的JS系列（三）</title>
     <link href="http://danieldemi.com/2018/05/12/YD-JS-3/"/>
     <id>http://danieldemi.com/2018/05/12/YD-JS-3/</id>
@@ -182,6 +157,31 @@
       
       
         &lt;h2 id=&quot;parseInt-1-0-19-答案是18；是不是很神奇？&quot;&gt;&lt;a href=&quot;#parseInt-1-0-19-答案是18；是不是很神奇？&quot; class=&quot;headerlink&quot; title=&quot;parseInt(1/0, 19) 答案是18；是不是很神奇？&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://danieldemi.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://danieldemi.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的JS系列（一）</title>
+    <link href="http://danieldemi.com/2018/05/12/YD-JS-1/"/>
+    <id>http://danieldemi.com/2018/05/12/YD-JS-1/</id>
+    <published>2018-05-12T05:37:39.000Z</published>
+    <updated>2018-05-22T14:07:06.354Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure><p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p><p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
       
     
     </summary>
