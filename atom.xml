@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://danieldemi.com/"/>
-  <updated>2018-05-22T14:07:08.287Z</updated>
+  <updated>2018-05-26T13:23:02.902Z</updated>
   <id>http://danieldemi.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习jquery源码-2 （jquery-2.0.3）（不兼容ie6,7,8）</title>
+    <link href="http://danieldemi.com/2018/05/26/learn-jquery-2/"/>
+    <id>http://danieldemi.com/2018/05/26/learn-jquery-2/</id>
+    <published>2018-05-26T08:40:01.000Z</published>
+    <updated>2018-05-26T13:23:02.902Z</updated>
+    
+    <content type="html"><![CDATA[<p>jquery 21至94行定义一些变了和函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">(function(window, undefined)) &#123;</span><br><span class="line">    // 这边传入undefined是因为，该词不是保留字符，在有些浏览器中是可以修改其值的</span><br><span class="line">    var </span><br><span class="line">    rootjQuery,</span><br><span class="line">    readyList,</span><br><span class="line">    // 这边保存字符串的undefined,这是为了兼容ie6，7，8，9。见下面的代码库1</span><br><span class="line">    core_strundefined = typeof undefined, </span><br><span class="line">    // 变量存储</span><br><span class="line">    location = window.location,</span><br><span class="line">    document = window.document,</span><br><span class="line">    docElem = document.documentElement,</span><br><span class="line">    // 这边是为了防冲突，见代码库2</span><br><span class="line">_jQuery = window.jQuery,</span><br><span class="line">_$ = window.$,</span><br><span class="line">    // $.type()中所需变量</span><br><span class="line">    class2type = &#123;&#125;,</span><br><span class="line">    // 老版本是缓存数据相关变量(2.0版本已经没有用处了)</span><br><span class="line">    core_deletedIds = [],</span><br><span class="line"></span><br><span class="line">    core_version = &quot;2.0.3&quot;,</span><br><span class="line"></span><br><span class="line">// 方法存储</span><br><span class="line">core_concat = core_deletedIds.concat,</span><br><span class="line">core_push = core_deletedIds.push,</span><br><span class="line">core_slice = core_deletedIds.slice,</span><br><span class="line">core_indexOf = core_deletedIds.indexOf,</span><br><span class="line">core_toString = class2type.toString,</span><br><span class="line">core_hasOwn = class2type.hasOwnProperty,</span><br><span class="line">core_trim = core_version.trim, // 去除前后空格</span><br><span class="line">    // 这边jquery是返回一个对象，见代码库3</span><br><span class="line">    jQuery = function( selector, context ) &#123;</span><br><span class="line">return new jQuery.fn.init( selector, context, rootjQuery );</span><br><span class="line">&#125;,</span><br><span class="line">    // 正则</span><br><span class="line">    // 匹配数字用的</span><br><span class="line">    core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,</span><br><span class="line">    // 匹配空格</span><br><span class="line">    core_rnotwhite = /\S+/g,</span><br><span class="line">    // 匹配标签&lt;p&gt;aaa 或 #div</span><br><span class="line">    rquickExpr = /^(?:\s*(&lt;[\w\W]+&gt;)[^&gt;]*|#([\w-]*))$/,</span><br><span class="line">    // 独立的空标签&lt;p&gt;&lt;/p&gt;</span><br><span class="line">    rsingleTag = /^&lt;(\w+)\s*\/?&gt;(?:&lt;\/\1&gt;|)$/,</span><br><span class="line">    // css兼容</span><br><span class="line">    // ie前缀</span><br><span class="line">    rmsPrefix = /^-ms-/,</span><br><span class="line">    // 大小写</span><br><span class="line">rdashAlpha = /-([\da-z])/gi,</span><br><span class="line">    // dom驼峰处理</span><br><span class="line">    fcamelCase = function( all, letter ) &#123;</span><br><span class="line">return letter.toUpperCase();</span><br><span class="line">&#125;,</span><br><span class="line">completed = function() &#123;</span><br><span class="line">document.removeEventListener( &quot;DOMContentLoaded&quot;, completed, false );</span><br><span class="line">window.removeEventListener( &quot;load&quot;, completed, false );</span><br><span class="line">jQuery.ready();</span><br><span class="line">&#125;;</span><br><span class="line">&#125;(window)</span><br></pre></td></tr></table></figure></p><p>代码库1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">一般情况下有2种判断a为underfined</span><br><span class="line">1. a == undefined</span><br><span class="line">2. typeof a == &apos;undefined&apos;</span><br><span class="line">注：但是在ie6789下，xmlNode.method使用第一种方式是无法判断出来的</span><br></pre></td></tr></table></figure></p><p>代码库2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">一般情况下，可能已经使用了$或jquery</span><br><span class="line">    var $ = 10;</span><br><span class="line">    var jquery = &apos;test&apos;;</span><br><span class="line">在这种情况下，我们在引入jquery.js就可以把这些变量先存储起来</span><br><span class="line">    &lt;script src=&quot;jquery-2.0.3.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>代码库3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">在jquery中我们都是这么使用的</span><br><span class="line">    jQuery().css()</span><br><span class="line">    $().css()</span><br><span class="line">我们想要这么使用，这说明jquery()就是一个对象</span><br><span class="line">我们平常创建一个对象都是这样的A</span><br><span class="line">A() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">A.prototype.init = &#123;&#125;</span><br><span class="line">A.prototype.css = &#123;&#125;</span><br><span class="line">var x =new A()</span><br><span class="line">x.init();</span><br><span class="line">x.css();</span><br><span class="line"></span><br><span class="line">那么在jQuery中他不像前面的，是直接调用方法</span><br><span class="line">$().css()</span><br><span class="line">他没有经过new，和init初始化，这说明在内部已经创建了对象，并且初始化了</span><br><span class="line">因此它返回的 new jQuery.fn.init( selector, context, rootjQuery )</span><br><span class="line">但是new 的是init相当于初始化了，但是对象是init的，它是如何使用jQuery下prototype属性方法呢</span><br><span class="line">就是通过以下一段代码实现的</span><br><span class="line">jQuery.prototype.init.prototype = jQuery.prototype</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;jquery 21至94行定义一些变了和函数&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;
+      
+    
+    </summary>
+    
+      <category term="jquery" scheme="http://danieldemi.com/categories/jquery/"/>
+    
+    
+      <category term="jquery" scheme="http://danieldemi.com/tags/jquery/"/>
+    
+  </entry>
   
   <entry>
     <title>学习jquery源码-1 （jquery-2.0.3）（不兼容ie6,7,8）</title>
@@ -144,6 +169,31 @@
   </entry>
   
   <entry>
+    <title>你不知道的JS系列（二）</title>
+    <link href="http://danieldemi.com/2018/05/12/YD-JS-2/"/>
+    <id>http://danieldemi.com/2018/05/12/YD-JS-2/</id>
+    <published>2018-05-12T05:37:39.000Z</published>
+    <updated>2018-05-22T14:07:05.162Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure><p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure><p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure><p>综上已解释了1.toString()为什么会报错的原因</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot;&gt;&lt;a href=&quot;#1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot; class=&quot;headerlink&quot; title=&quot;1.toSring()/1.toFixed(3)
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://danieldemi.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://danieldemi.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
     <title>你不知道的JS系列（三）</title>
     <link href="http://danieldemi.com/2018/05/12/YD-JS-3/"/>
     <id>http://danieldemi.com/2018/05/12/YD-JS-3/</id>
@@ -182,31 +232,6 @@
       
       
         &lt;h2 id=&quot;在函数中为什么这样调用-slice-call-arguments&quot;&gt;&lt;a href=&quot;#在函数中为什么这样调用-slice-call-arguments&quot; class=&quot;headerlink&quot; title=&quot;在函数中为什么这样调用[].slice.call(arg
-      
-    
-    </summary>
-    
-      <category term="js" scheme="http://danieldemi.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://danieldemi.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>你不知道的JS系列（二）</title>
-    <link href="http://danieldemi.com/2018/05/12/YD-JS-2/"/>
-    <id>http://danieldemi.com/2018/05/12/YD-JS-2/</id>
-    <published>2018-05-12T05:37:39.000Z</published>
-    <updated>2018-05-22T14:07:05.162Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure><p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure><p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure><p>综上已解释了1.toString()为什么会报错的原因</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot;&gt;&lt;a href=&quot;#1-toSring-1-toFixed-3-等这些为什么执行会报错？&quot; class=&quot;headerlink&quot; title=&quot;1.toSring()/1.toFixed(3)
       
     
     </summary>
