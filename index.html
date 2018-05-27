@@ -260,6 +260,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/27/regex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/27/regex/" itemprop="url">js正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T11:43:46+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>正则表达式需要记一下以下规则：<br>/** </p>
+<ul>
+<li>元字符</li>
+<li>\t 水平制表符 tab</li>
+<li>\v 垂直制表符</li>
+<li>\n 换行符</li>
+<li>\r 回车符</li>
+<li>\O 空字符</li>
+<li>\f 换页符</li>
+<li>\cX 与X对应的控制符（Ctrl + X）<br>*/<br>/**</li>
+<li>[] 代表一类 [abc]代表匹配abc中的任意一个</li>
+<li>[^] 代表反向类 [^abc] 匹配除了abc之外的任意值</li>
+<li>范围类</li>
+<li>[a-z] 代表a-z的任意小写字母</li>
+<li>[A-D] 代表a-z的任意大写字母</li>
+<li>[a-zA-Z]</li>
+<li>() 代表一组<br>*/<br>/**</li>
+<li>预定义类</li>
+<li>.  任意字符 [^\n\r]</li>
+<li>\d 数字字符 (即[0-9])</li>
+<li>\D 非数字字符 ([^0-9])</li>
+<li>\s 空白符 </li>
+<li>\S 非空白符</li>
+<li>\w 单词字符 ([a-zA-Z0-9])</li>
+<li>\W 非单子字符<br>*/<br>/**</li>
+<li>边界字符</li>
+<li>^ 以xxx开始</li>
+<li>$ 以xxx结束</li>
+<li>\b 单词边界</li>
+<li>\B 非单词边界<br>*/<br>/**</li>
+<li>量词</li>
+<li>？ 出现0次或1次</li>
+<li><ul>
+<li>出现一次或多次</li>
+</ul>
+</li>
+<li><ul>
+<li>出现零次或多次</li>
+</ul>
+</li>
+<li>{n} 出现n次</li>
+<li>{n,m} 出现n到m次</li>
+<li>{n,} 至少出现n次<br>*/<br>/**</li>
+<li>分组  $0永远代表整个表达式</li>
+<li>/(ab)(cd)(ef)/ 可使用捕获的$1 $2 $3来代表分组</li>
+<li>?: 代表被忽略的分组</li>
+<li>/(?:ab)(cd)(ef)/ 这时捕获的分组只有2组</li>
+<li>在表达式内可使用\1  \n来表示匹配的分组</li>
+<li>/(a)/1/ 代表/aa/<br>*/<br>// 在工作中用到的正则表达式（会不断增加）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 经度匹配 -180到180 小数点最多6位 (不包含180)</span><br><span class="line">longitudeRule = /^[+-]?((\d&#123;1,2&#125;)|(1[0-7]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 纬度匹配 -90到90 小数点最多6位 (不包含90)</span><br><span class="line">latitudeRule = /^[+-]?((\d&#123;1&#125;)|([0-8]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 中文匹配</span><br><span class="line">chineseCharacterRule = /^[\u4e00-\u9fa5]&#123;0,&#125;$/,</span><br><span class="line">// 邮件匹配</span><br><span class="line">emailRule = /^\w[\w\-_\.]&#123;0,&#125;@[\w\-_\.]&#123;0,&#125;\w$/,</span><br><span class="line">// IP地址匹配</span><br><span class="line">IPRule = /^(((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))\.)&#123;3&#125;((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))$/</span><br><span class="line">// 密码强度匹配</span><br><span class="line">passwordRule = /^(.*\d)(.*[a-z])(.*[A-Z]))$/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/26/learn-jquery-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1156,154 +1348,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:37:39+08:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
-<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
-<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
-<p>综上已解释了1.toString()为什么会报错的原因</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1580,6 +1624,154 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:37:39+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
+<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
+<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+<p>综上已解释了1.toString()为什么会报错的原因</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1630,7 +1822,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

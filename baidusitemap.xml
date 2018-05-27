@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://danieldemi.com/2018/05/27/regex/</loc>
+    <lastmod>2018-05-27T03:54:46.851Z</lastmod>
+    <data>
+        <display>
+        <title>js正则表达式</title>
+        <pubTime>2018-05-27T03:43:46.000Z</pubTime>
+        
+        <tag>js</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://danieldemi.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://danieldemi.com/2018/05/26/learn-jquery-2/</loc>
-    <lastmod>2018-05-26T13:23:02.902Z</lastmod>
+    <lastmod>2018-05-26T15:36:38.314Z</lastmod>
     <data>
         <display>
         <title>学习jquery源码-2 （jquery-2.0.3）（不兼容ie6,7,8）</title>
