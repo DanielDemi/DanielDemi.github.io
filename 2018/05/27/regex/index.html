@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="DanielDemi">
 <meta property="og:description" content="正则表达式需要记一下以下规则：/**   元字符 \t 水平制表符 tab \v 垂直制表符 \n 换行符 \r 回车符 \O 空字符 \f 换页符 \cX 与X对应的控制符（Ctrl + X）*//** [] 代表一类 [abc]代表匹配abc中的任意一个 [^] 代表反向类 [^abc] 匹配除了abc之外的任意值 范围类 [a-z] 代表a-z的任意小写字母 [A-D] 代表a-z的任意大写">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-27T03:54:46.851Z">
+<meta property="og:updated_time" content="2018-05-27T07:28:47.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js正则表达式">
 <meta name="twitter:description" content="正则表达式需要记一下以下规则：/**   元字符 \t 水平制表符 tab \v 垂直制表符 \n 换行符 \r 回车符 \O 空字符 \f 换页符 \cX 与X对应的控制符（Ctrl + X）*//** [] 代表一类 [abc]代表匹配abc中的任意一个 [^] 代表反向类 [^abc] 匹配除了abc之外的任意值 范围类 [a-z] 代表a-z的任意小写字母 [A-D] 代表a-z的任意大写">
@@ -406,7 +406,7 @@
 <li>?: 代表被忽略的分组</li>
 <li>/(?:ab)(cd)(ef)/ 这时捕获的分组只有2组</li>
 <li>在表达式内可使用\1  \n来表示匹配的分组</li>
-<li>/(a)/1/ 代表/aa/<br>*/<br>// 在工作中用到的正则表达式（会不断增加）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 经度匹配 -180到180 小数点最多6位 (不包含180)</span><br><span class="line">longitudeRule = /^[+-]?((\d&#123;1,2&#125;)|(1[0-7]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 纬度匹配 -90到90 小数点最多6位 (不包含90)</span><br><span class="line">latitudeRule = /^[+-]?((\d&#123;1&#125;)|([0-8]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 中文匹配</span><br><span class="line">chineseCharacterRule = /^[\u4e00-\u9fa5]&#123;0,&#125;$/,</span><br><span class="line">// 邮件匹配</span><br><span class="line">emailRule = /^\w[\w\-_\.]&#123;0,&#125;@[\w\-_\.]&#123;0,&#125;\w$/,</span><br><span class="line">// IP地址匹配</span><br><span class="line">IPRule = /^(((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))\.)&#123;3&#125;((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))$/</span><br><span class="line">// 密码强度匹配</span><br><span class="line">passwordRule = /^(.*\d)(.*[a-z])(.*[A-Z]))$/</span><br></pre></td></tr></table></figure>
+<li>/(a)/1/ 代表/aa/<br>*/<br>// 在工作中用到的正则表达式（会不断增加）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 经度匹配 -180到180 小数点最多6位 (不包含180)</span><br><span class="line">longitudeRule = /^[+-]?((\d&#123;1,2&#125;)|(1[0-7]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 纬度匹配 -90到90 小数点最多6位 (不包含90)</span><br><span class="line">latitudeRule = /^[+-]?((\d&#123;1&#125;)|([0-8]\d))(\.\d&#123;0,6&#125;)?$/,</span><br><span class="line">// 中文匹配</span><br><span class="line">chineseCharacterRule = /^[\u4e00-\u9fa5]&#123;0,&#125;$/,</span><br><span class="line">// 邮件匹配</span><br><span class="line">emailRule = /^\w[\w\-_\.]&#123;0,&#125;@[\w\-_\.]&#123;0,&#125;\w$/,</span><br><span class="line">// IP地址匹配</span><br><span class="line">IPRule = /^(((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))\.)&#123;3&#125;((\d&#123;1,2&#125;)|([1-2][0-4]\d)|([1-2]5[0-5]))$/</span><br><span class="line">// 密码强度匹配</span><br><span class="line">passwordRule = /^(.*\d)(.*[a-z])(.*[A-Z]).&#123;8,10&#125;$/</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -448,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/27/learn-jquery-3/" rel="prev" title="学习jquery源码-3 （jquery-2.0.3）（不兼容ie6,7,8）">
+                学习jquery源码-3 （jquery-2.0.3）（不兼容ie6,7,8） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +523,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
