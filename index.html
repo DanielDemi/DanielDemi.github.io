@@ -354,10 +354,7 @@
         
           
             <h4 id="1-数据双向绑定"><a href="#1-数据双向绑定" class="headerlink" title="1.数据双向绑定"></a>1.数据双向绑定</h4><p>在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，<br>如果没有一开始没有定义参数的话，那么就不会双向实现<br>需要通过set来修改变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=&quot;test.val&quot;&gt;</span><br><span class="line"></span><br><span class="line">data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        test: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">    test.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">// 这种情况下是不会双向绑定的</span><br><span class="line"></span><br><span class="line">需要这样</span><br><span class="line">created() &#123;</span><br><span class="line">    this.$set(test, val, 1)</span><br><span class="line">&#125;</span><br><span class="line">// 经过set设置，会将该参数进入watch，那么就会双向绑定了</span><br><span class="line"></span><br><span class="line">当然一开始data里面直接有val参数就完全不是问题了，这类主要是针对动态创建的问题</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### 2.修改其他组件的样式</span><br><span class="line">在vue文件中，为让文件样式独立，我们经常会在style加上scoped，这样</span><br><span class="line">这里的样式只会作用于该文件，但是这样我们修改自组件的样式的时候，往往是不生效的</span><br><span class="line">需要这样设置才行,在需要修改子组件样式前面加/deep/，如</span><br></pre></td></tr></table></figure></p>
-<pre><code>.parent /deep/ .child {
-
-}
-</code></pre><p><code>`</code></p>
+<p>parent /deep/ child {}<br><code>`</code> </p>
 
           
         
@@ -1642,7 +1639,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-1/">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
@@ -1661,7 +1658,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/12/YD-JS-1/" itemprop="url">你不知道的JS系列（一）</a></h1>
+                <a class="post-title-link" href="/2018/05/12/YD-JS-3/" itemprop="url">你不知道的JS系列（三）</a></h1>
         
 
         <div class="post-meta">
@@ -1735,12 +1732,7 @@
       
         
           
-            <h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure>
-<p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p>
-<p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>
+            <h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>
 
           
         
