@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量123456789101112131415161718192021222324&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        tes">
+<meta name="description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量12345678910111213141516171819202122232425&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        t">
 <meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue采坑记录">
 <meta property="og:url" content="http://danieldemi.com/2018/05/30/vue-1/index.html">
 <meta property="og:site_name" content="DanielDemi">
-<meta property="og:description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量123456789101112131415161718192021222324&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        tes">
+<meta property="og:description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量12345678910111213141516171819202122232425&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T15:43:07.501Z">
+<meta property="og:updated_time" content="2018-06-07T14:53:17.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue采坑记录">
-<meta name="twitter:description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量123456789101112131415161718192021222324&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        tes">
+<meta name="twitter:description" content="1.数据双向绑定在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，如果没有一开始没有定义参数的话，那么就不会双向实现需要通过set来修改变量12345678910111213141516171819202122232425&amp;lt;input v-model=&amp;quot;test.val&amp;quot;&amp;gt;data() &amp;#123;    return &amp;#123;        t">
 
 
 
@@ -358,9 +358,11 @@
       
 
       
-        <h4 id="1-数据双向绑定"><a href="#1-数据双向绑定" class="headerlink" title="1.数据双向绑定"></a>1.数据双向绑定</h4><p>在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，<br>如果没有一开始没有定义参数的话，那么就不会双向实现<br>需要通过set来修改变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=&quot;test.val&quot;&gt;</span><br><span class="line"></span><br><span class="line">data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        test: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">    test.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">// 这种情况下是不会双向绑定的</span><br><span class="line"></span><br><span class="line">需要这样</span><br><span class="line">created() &#123;</span><br><span class="line">    this.$set(test, val, 1)</span><br><span class="line">&#125;</span><br><span class="line">// 经过set设置，会将该参数进入watch，那么就会双向绑定了</span><br><span class="line"></span><br><span class="line">当然一开始data里面直接有val参数就完全不是问题了，这类主要是针对动态创建的问题</span><br><span class="line">``` </span><br><span class="line">#### 2.修改其他组件的样式</span><br><span class="line">在vue文件中，为让文件样式独立，我们经常会在style加上scoped，这样</span><br><span class="line">这里的样式只会作用于该文件，但是这样我们修改自组件的样式的时候，往往是不生效的</span><br><span class="line">需要这样设置才行,在需要修改子组件样式前面加/deep/，如</span><br></pre></td></tr></table></figure></p>
-<p>.parent /deep/ .child {</p>
-<p>}<br><code>`</code></p>
+        <h4 id="1-数据双向绑定"><a href="#1-数据双向绑定" class="headerlink" title="1.数据双向绑定"></a>1.数据双向绑定</h4><p>在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，<br>如果没有一开始没有定义参数的话，那么就不会双向实现<br>需要通过set来修改变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=&quot;test.val&quot;&gt;</span><br><span class="line"></span><br><span class="line">data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        test: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">    test.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">// 这种情况下是不会双向绑定的</span><br><span class="line"></span><br><span class="line">需要这样</span><br><span class="line">created() &#123;</span><br><span class="line">    this.$set(test, val, 1)</span><br><span class="line">&#125;</span><br><span class="line">// 经过set设置，会将该参数进入watch，那么就会双向绑定了</span><br><span class="line"></span><br><span class="line">当然一开始data里面直接有val参数就完全不是问题了，这类主要是针对动态创建的问题</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### 2.修改其他组件的样式</span><br><span class="line">在vue文件中，为让文件样式独立，我们经常会在style加上scoped，这样</span><br><span class="line">这里的样式只会作用于该文件，但是这样我们修改自组件的样式的时候，往往是不生效的</span><br><span class="line">需要这样设置才行,在需要修改子组件样式前面加/deep/，如</span><br></pre></td></tr></table></figure></p>
+<pre><code>.parent /deep/ .child {
+
+}
+</code></pre><p><code>`</code></p>
 
       
     </div>
