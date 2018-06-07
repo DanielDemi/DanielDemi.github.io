@@ -260,6 +260,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/30/vue-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/vue-1/" itemprop="url">vue采坑记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T22:15:22+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="1-数据双向绑定"><a href="#1-数据双向绑定" class="headerlink" title="1.数据双向绑定"></a>1.数据双向绑定</h4><p>在vue中数据双向绑定是十分重要的，那么所有的参数都必要现有定义，<br>如果没有一开始没有定义参数的话，那么就不会双向实现<br>需要通过set来修改变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=&quot;test.val&quot;&gt;</span><br><span class="line"></span><br><span class="line">data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        test: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">    test.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">// 这种情况下是不会双向绑定的</span><br><span class="line"></span><br><span class="line">需要这样</span><br><span class="line">created() &#123;</span><br><span class="line">    this.$set(test, val, 1)</span><br><span class="line">&#125;</span><br><span class="line">// 经过set设置，会将该参数进入watch，那么就会双向绑定了</span><br><span class="line"></span><br><span class="line">当然一开始data里面直接有val参数就完全不是问题了，这类主要是针对动态创建的问题</span><br><span class="line">``` </span><br><span class="line">#### 2.修改其他组件的样式</span><br><span class="line">在vue文件中，为让文件样式独立，我们经常会在style加上scoped，这样</span><br><span class="line">这里的样式只会作用于该文件，但是这样我们修改自组件的样式的时候，往往是不生效的</span><br><span class="line">需要这样设置才行,在需要修改子组件样式前面加/deep/，如</span><br></pre></td></tr></table></figure></p>
+<p>.parent /deep/ .child {</p>
+<p>}<br><code>`</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/27/learn-jquery-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -359,7 +503,7 @@
 <h2 id="init-初始化和参数管理"><a href="#init-初始化和参数管理" class="headerlink" title="init(): 初始化和参数管理"></a>init(): 初始化和参数管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">// 源码：</span><br><span class="line">// 选择器selector 限制条件context 内部参数不对外暴露rootjQuery：$(document)</span><br><span class="line">// 通常我们选择元素是这样的$(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;) 这种事各类选择权选择元素</span><br><span class="line">// 另外一种是创建标签 $(&apos;&lt;li&gt;&apos;)  $(&apos;&lt;li&gt;1&lt;/li&gt;&apos;)  这种都是创建标签</span><br><span class="line">init: function( selector, context, rootjQuery ) &#123;</span><br><span class="line">    var match, elem;</span><br><span class="line"></span><br><span class="line">    // 对不正确的选择器进行处理: $(&quot;&quot;), $(null), $(undefined), $(false)</span><br><span class="line">    if ( !selector ) &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 处理字符串 如 $(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;)或  $(&apos;&lt;li&gt;&apos;)  $(&apos;&lt;li&gt;1&lt;/li&gt;&apos;)</span><br><span class="line">    if ( typeof selector === &quot;string&quot; ) &#123;</span><br><span class="line">        // 处理$(&apos;&lt;li&gt;&apos;)</span><br><span class="line">        if ( selector.charAt(0) === &quot;&lt;&quot; &amp;&amp; selector.charAt( selector.length - 1 ) === &quot;&gt;&quot; &amp;&amp; selector.length &gt;= 3 ) &#123;</span><br><span class="line">            // </span><br><span class="line">            match = [ null, selector, null ];</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 处理选择器 $(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;);此外还有不规则的标签如$(&apos;&lt;li&gt;hello&apos;)</span><br><span class="line">            // rquickExpr = /^(?:\s*(&lt;[\w\W]+&gt;)[^&gt;]*|#([\w-]*))$/ </span><br><span class="line">            // 用于匹配 $(&apos;#id&apos;) 和 $(&apos;&lt;li&gt;hello&apos;) 会有结果 match = []</span><br><span class="line">            // $(&apos;#id&apos;) match = [&apos;#id&apos;, null, &apos;id&apos;]</span><br><span class="line">            // $(&apos;&lt;li&gt;hello&apos;) match = [&apos;&lt;li&gt;hello&apos;, &apos;&lt;li&gt;&apos;, nill]</span><br><span class="line">            // 而$(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;)则会是match = null</span><br><span class="line">            match = rquickExpr.exec( selector );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 根据上面的处理match有3种情况</span><br><span class="line">        // 1.null</span><br><span class="line">        // 2.[&apos;#id&apos;, null, &apos;id&apos;]</span><br><span class="line">        // 3.[&apos;&lt;li&gt;hello&apos;, &lt;li&gt;, null]</span><br><span class="line">        // 4.[null, &lt;li&gt;, null]</span><br><span class="line"></span><br><span class="line">        // 2,4可以进入 ,为什么2可以进入，2的match[1]为null，因为id选择器不需要上下文限制，因此!context为真</span><br><span class="line">        if ( match &amp;&amp; (match[1] || !context) ) &#123;</span><br><span class="line"></span><br><span class="line">            // 4进入这里，就是标签 context只能是document，但是可以指定不同的document，如iframe下的</span><br><span class="line">            if ( match[1] ) &#123;</span><br><span class="line">                // 可能填写 document 或 $(document) 最终得到都是原生document</span><br><span class="line">                context = context instanceof jQuery ? context[0] : context;</span><br><span class="line"></span><br><span class="line">                // scripts is true for back-compat</span><br><span class="line">                // jQuery.parseHTML 把字符串转换成节点数组;见代码库init-1</span><br><span class="line">                // jQuery.merge 合并数组,类数组</span><br><span class="line">                // 这边返回this对象即为类数组</span><br><span class="line">                // &#123;</span><br><span class="line">                //    0：xxx</span><br><span class="line">                //    1: xxx</span><br><span class="line">                //    ...</span><br><span class="line">                //    length: n</span><br><span class="line">                // &#125;</span><br><span class="line">                jQuery.merge( this, jQuery.parseHTML(</span><br><span class="line">                    match[1],</span><br><span class="line">                    context &amp;&amp; context.nodeType ? context.ownerDocument || context : document,</span><br><span class="line">                    true</span><br><span class="line">                ) );</span><br><span class="line"></span><br><span class="line">                // 针对标签带属性的处理，如 $(&apos;&lt;li&gt;&apos;, &#123;title: &apos;tese&apos;, html:&apos;abcd&apos;&#125;)</span><br><span class="line">                // rsingleTag匹配单标签  jQuery.isPlainObject判断是否为对象</span><br><span class="line">                if ( rsingleTag.test( match[1] ) &amp;&amp; jQuery.isPlainObject( context ) ) &#123;</span><br><span class="line">                    for ( match in context ) &#123;</span><br><span class="line">                        // jquery是否有对应的方法， 如html。直接函数调用</span><br><span class="line">                        if ( jQuery.isFunction( this[ match ] ) ) &#123;</span><br><span class="line">                            this[ match ]( context[ match ] );</span><br><span class="line"></span><br><span class="line">                        // 其他都作为属性</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            this.attr( match, context[ match ] );</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                return this;</span><br><span class="line"></span><br><span class="line">            // id选择器进入这里</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                elem = document.getElementById( match[2] );</span><br><span class="line">                // 确保节点存在，   </span><br><span class="line">                // 在clone时,某种情况下即使删除了节点也会存在</span><br><span class="line">                // 因此必须在判断下是否有父节点</span><br><span class="line">                if ( elem &amp;&amp; elem.parentNode ) &#123;</span><br><span class="line">                    this.length = 1;</span><br><span class="line">                    this[0] = elem;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                this.context = document;</span><br><span class="line">                this.selector = selector;</span><br><span class="line">                return this;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        // 处理: $(expr, $(...))</span><br><span class="line">        &#125; else if ( !context || context.jquery ) &#123;</span><br><span class="line">            return ( context || rootjQuery ).find( selector );</span><br><span class="line">        // 处理: $(expr, context)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return this.constructor( context ).find( selector );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    // 处理节点 如$(this) $(document)</span><br><span class="line">    &#125; else if ( selector.nodeType ) &#123;</span><br><span class="line">        this.context = this[0] = selector;</span><br><span class="line">        this.length = 1;</span><br><span class="line">        return this;</span><br><span class="line"></span><br><span class="line">    // 处理函数形式如 $(function() &#123;&#125;)</span><br><span class="line">    // Shortcut for document ready</span><br><span class="line">    &#125; else if ( jQuery.isFunction( selector ) ) &#123;</span><br><span class="line">        return rootjQuery.ready( selector );</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理数组和对象 $([]) $(&#123;&#125;)</span><br><span class="line">    if ( selector.selector !== undefined ) &#123;</span><br><span class="line">        this.selector = selector.selector;</span><br><span class="line">        this.context = selector.context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery.makeArray( selector, this );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码库init-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">jQuery.parseHTML：</span><br><span class="line">var str = &apos;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;2&lt;/li&gt;&lt;li&gt;3&lt;/li&gt;&apos;</span><br><span class="line">var arr = jQuery.parseHTML(str, document, true); // [&apos;li&apos;, &apos;li&apos;, &apos;li&apos;]</span><br><span class="line">// flag 表示script标签是否可以填进来</span><br><span class="line">parseHTML(str, document, flag)</span><br><span class="line">var src = &apos;&lt;script&gt;alert(1)&lt;\/script&gt;&apos;</span><br><span class="line">jQuery.parseHTML(str, document, false) // 添加失败</span><br><span class="line">jQuery.parseHTML(str, document, true) // 添加成功</span><br><span class="line"></span><br><span class="line">jQuery.merge：</span><br><span class="line">var arr = [&apos;a&apos;, &apos;b&apos;]</span><br><span class="line">var arr2 = [&apos;c&apos;, &apos;d&apos;]</span><br><span class="line"></span><br><span class="line">console.log($.merge(arr, arr2)) // [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;]</span><br><span class="line">对我们对外就是这么使用的合并数组</span><br><span class="line"></span><br><span class="line">在内部可以合并特殊的json形式，即类数组</span><br><span class="line">var arr3 = &#123;</span><br><span class="line">    0: &apos;1&apos;,</span><br><span class="line">    1: &apos;v&apos;,</span><br><span class="line">    length: 2</span><br><span class="line">&#125;</span><br><span class="line">$.merge(arr3, arr2) </span><br><span class="line">//  &#123;</span><br><span class="line">    0: &apos;1&apos;,</span><br><span class="line">    1: &apos;v&apos;,</span><br><span class="line">    2：&apos;c&apos;,</span><br><span class="line">    3: &apos;d&apos;,</span><br><span class="line">    length: 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="selector和length"><a href="#selector和length" class="headerlink" title="selector和length"></a>selector和length</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">selector: &quot;&quot;, // 用于保存选择器</span><br><span class="line">length: 0, // 记录节点长度</span><br></pre></td></tr></table></figure>
-<h2 id="一些方法"><a href="#一些方法" class="headerlink" title="一些方法"></a>一些方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="一些方法"><a href="#一些方法" class="headerlink" title="一些方法"></a>一些方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">// 转数组（将节点类数组对象转换为数组）</span><br><span class="line">toArray: function() &#123;</span><br><span class="line">    return core_slice.call( this );</span><br><span class="line">&#125;,</span><br><span class="line">// 转原生集合（）</span><br><span class="line">get: function( num ) &#123;</span><br><span class="line">    return num == null ?</span><br><span class="line">    // 不传参，则返回整个数组</span><br><span class="line">    this.toArray() :</span><br><span class="line">    // 如果参数大于0，则从前往后数，参数小于0则从后往前数，返回指定的元素</span><br><span class="line">    ( num &lt; 0 ? this[ this.length + num ] : this[ num ] );</span><br><span class="line">&#125;,</span><br><span class="line">//JQ对象的入栈（ 源码内部使用比较多）先进后出</span><br><span class="line">pushStack: function( elems ) &#123;</span><br><span class="line"></span><br><span class="line">    var ret = jQuery.merge( this.constructor(), elems );</span><br><span class="line">    // 和end方法公用，回溯上一层，链式调用</span><br><span class="line">    ret.prevObject = this;</span><br><span class="line">    ret.context = this.context;</span><br><span class="line"></span><br><span class="line">    return ret;</span><br><span class="line">&#125;,</span><br><span class="line">// 例如demo: $(div).pushStack($(span)).css().end().css();</span><br><span class="line">end: function() &#123;</span><br><span class="line">    return this.prevObject || this.constructor(null);</span><br><span class="line">&#125;,</span><br><span class="line">// 切割字符串  也使用入栈方法，这样就也可以配合end链式调用；</span><br><span class="line">// 之后用到pushStack都是同理</span><br><span class="line">slice: function() &#123;</span><br><span class="line">    return this.pushStack( core_slice.apply( this, arguments ) );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历  调用jQuery下的工具方法each实现</span><br><span class="line">each: function( callback, args ) &#123;</span><br><span class="line">    return jQuery.each( this, callback, args );</span><br><span class="line">&#125;,</span><br><span class="line">// dom加载回调函数</span><br><span class="line">ready: function( fn ) &#123;</span><br><span class="line">    jQuery.ready.promise().done( fn );</span><br><span class="line"></span><br><span class="line">    return this;</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的第一项</span><br><span class="line">first: function() &#123;</span><br><span class="line">    return this.eq( 0 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的最后一项</span><br><span class="line">last: function() &#123;</span><br><span class="line">    return this.eq( -1 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的指定项</span><br><span class="line">eq: function( i ) &#123;</span><br><span class="line">    var len = this.length,</span><br><span class="line">        j = +i + ( i &lt; 0 ? len : 0 );</span><br><span class="line">    return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[j] ] : [] );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历</span><br><span class="line">map: function( callback ) &#123;</span><br><span class="line">    return this.pushStack( jQuery.map(this, function( elem, i ) &#123;</span><br><span class="line">        return callback.call( elem, i, elem );</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1630,154 +1774,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:37:39+08:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
-<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
-<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
-<p>综上已解释了1.toString()为什么会报错的原因</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1832,7 +1828,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1843,7 +1839,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1854,7 +1850,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

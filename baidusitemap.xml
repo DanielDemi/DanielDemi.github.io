@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://danieldemi.com/2018/05/27/learn-jquery-3/</loc>
-    <lastmod>2018-05-27T14:39:31.985Z</lastmod>
+    <lastmod>2018-06-07T14:47:03.237Z</lastmod>
     <data>
         <display>
         <title>学习jquery源码-3 （jquery-2.0.3）（不兼容ie6,7,8）</title>
@@ -23,6 +23,25 @@
     </url>
 
     
+  <url>
+    <loc>http://danieldemi.com/2018/05/30/vue-1/</loc>
+    <lastmod>2018-05-30T15:43:07.501Z</lastmod>
+    <data>
+        <display>
+        <title>vue采坑记录</title>
+        <pubTime>2018-05-30T14:15:22.000Z</pubTime>
+        
+        <tag>vue</tag>
+         
+         
+           
+             
+              <breadCrumb title="vue" url="http://danieldemi.com/categories/vue/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://danieldemi.com/2018/05/27/regex/</loc>

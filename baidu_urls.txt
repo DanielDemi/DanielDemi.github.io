@@ -1,3 +1,4 @@
+http://danieldemi.com/2018/05/30/vue-1/
 http://danieldemi.com/2018/05/27/learn-jquery-3/
 http://danieldemi.com/2018/05/27/regex/
 http://danieldemi.com/2018/05/26/learn-jquery-2/
@@ -7,4 +8,3 @@ http://danieldemi.com/2018/05/21/YD-JS-5/
 http://danieldemi.com/2018/05/21/YD-JS-4/
 http://danieldemi.com/2018/05/14/canvas-time/
 http://danieldemi.com/2018/05/12/YD-JS-1/
-http://danieldemi.com/2018/05/12/YD-JS-2/
