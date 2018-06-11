@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
+    
+    <lastmod>2018-06-11T15:11:57.575Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://danieldemi.com/2018/06/11/websocket/</loc>
     
-    <lastmod>2018-06-11T15:07:27.041Z</lastmod>
+    <lastmod>2018-06-11T15:11:39.895Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://danieldemi.com/2018/06/11/interview-1/</loc>
     
     <lastmod>2018-06-11T14:29:40.697Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
-    
-    <lastmod>2018-06-10T04:10:05.026Z</lastmod>
     
   </url>
   
