@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="DanielDemi" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这边列举了5个前端经典的面试题首先我们来看一下题目，都各自思考一下，自己是否能够做出来。然后再跟后面的答案对比一下 题目1123456var a = &amp;#123;n:1&amp;#125;var b = &amp;#123;n:2&amp;#125;b.x = a = &amp;#123;n:3&amp;#125;console.log(b.x)a.x = a = &amp;#123;n:3&amp;#125;console.log(a.x) 题目21">
+<meta name="keywords" content="前端面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试经典题目">
+<meta property="og:url" content="http://danieldemi.com/2018/06/11/interview-1/index.html">
+<meta property="og:site_name" content="DanielDemi">
+<meta property="og:description" content="这边列举了5个前端经典的面试题首先我们来看一下题目，都各自思考一下，自己是否能够做出来。然后再跟后面的答案对比一下 题目1123456var a = &amp;#123;n:1&amp;#125;var b = &amp;#123;n:2&amp;#125;b.x = a = &amp;#123;n:3&amp;#125;console.log(b.x)a.x = a = &amp;#123;n:3&amp;#125;console.log(a.x) 题目21">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-11T14:29:40.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试经典题目">
+<meta name="twitter:description" content="这边列举了5个前端经典的面试题首先我们来看一下题目，都各自思考一下，自己是否能够做出来。然后再跟后面的答案对比一下 题目1123456var a = &amp;#123;n:1&amp;#125;var b = &amp;#123;n:2&amp;#125;b.x = a = &amp;#123;n:3&amp;#125;console.log(b.x)a.x = a = &amp;#123;n:3&amp;#125;console.log(a.x) 题目21">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://danieldemi.com/2018/06/11/interview-1/"/>
+
+
+
+
+
+  <title>前端面试经典题目 | DanielDemi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DanielDemi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-livies">
+          <a href="/livies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/06/11/interview-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试经典题目</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T22:29:06+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端面试/" itemprop="url" rel="index">
+                    <span itemprop="name">前端面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="这边列举了5个前端经典的面试题"><a href="#这边列举了5个前端经典的面试题" class="headerlink" title="这边列举了5个前端经典的面试题"></a>这边列举了5个前端经典的面试题</h3><p>首先我们来看一下题目，都各自思考一下，自己是否能够做出来。然后再跟后面的答案对比一下</p>
+<h4 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;n:1&#125;</span><br><span class="line">var b = &#123;n:2&#125;</span><br><span class="line">b.x = a = &#123;n:3&#125;</span><br><span class="line">console.log(b.x)</span><br><span class="line">a.x = a = &#123;n:3&#125;</span><br><span class="line">console.log(a.x)</span><br></pre></td></tr></table></figure>
+<h4 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">（1）</span><br><span class="line">var start = new Date()</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(new Date() -start)</span><br><span class="line">&#125;, 500)</span><br><span class="line">（2）</span><br><span class="line">var start = new Date()</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(new Date() -start)</span><br><span class="line">&#125;, 500)</span><br><span class="line"></span><br><span class="line">while((new Date() - start &lt;= 1000) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var log = console.log</span><br><span class="line">var hint = window.alert</span><br><span class="line">var write = document.write</span><br><span class="line">log(&apos;123&apos;)</span><br><span class="line">hint(&apos;123&apos;)</span><br><span class="line">wirte(&apos;123&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="题目4"><a href="#题目4" class="headerlink" title="题目4"></a>题目4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var name = &apos;A&apos;</span><br><span class="line">function getName() &#123;</span><br><span class="line">    return this.name</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: &apos;B&apos;,</span><br><span class="line">    getName: function() &#123;</span><br><span class="line">        return this.name</span><br><span class="line">    &#125;,</span><br><span class="line">    showName:function(a) &#123;</span><br><span class="line">        console.log(getName())</span><br><span class="line">        console.log(a())</span><br><span class="line">        console.log(a === arguments[0])</span><br><span class="line">        console.log(arguments[0]())</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">obj .showName(getName, 1)</span><br></pre></td></tr></table></figure>
+<h4 id="题目5"><a href="#题目5" class="headerlink" title="题目5"></a>题目5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">async function async1() &#123;</span><br><span class="line">    console.log(&apos;async1 start&apos;)</span><br><span class="line">    await async2()</span><br><span class="line">    console.log(&apos;async1 end&apos;)</span><br><span class="line">&#125;</span><br><span class="line">async function async2() &#123;</span><br><span class="line">    console.log(async2())</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;script start&apos;)</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;)</span><br><span class="line">&#125;, 0)</span><br><span class="line">async1()</span><br><span class="line">new Promise(function (resolve) &#123;</span><br><span class="line">    console.log(&apos;promise1&apos;)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;promise2&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;script end&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="答案1"><a href="#答案1" class="headerlink" title="答案1"></a>答案1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(b.x)   // &#123;n:3&#125;</span><br><span class="line">console.log(a.x)   // undefined</span><br><span class="line">这是跟js的优先级有关的 .的优先级最高，因此先计算左边的b.x,a.x</span><br></pre></td></tr></table></figure>
+<h4 id="答案2"><a href="#答案2" class="headerlink" title="答案2"></a>答案2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(1)</span><br><span class="line">console.log(new Date() -start)  // 不是一定500,而是大于等于500</span><br><span class="line">主要是由于定时器的时间不一定准，这个跟异步的机制有关</span><br><span class="line">当定时器的时间到了之后，执行函数会进入栈中，会根据栈中的执行任务，</span><br><span class="line">依次执行（不懂的可以学习一下异步机制）</span><br><span class="line">(2)</span><br><span class="line">console.log(new Date() -start)  // 大于等于1000</span><br><span class="line">由于是单线程</span><br></pre></td></tr></table></figure>
+<h4 id="答案3"><a href="#答案3" class="headerlink" title="答案3"></a>答案3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log(&apos;123&apos;) // 正常</span><br><span class="line">hint(&apos;123&apos;) // 正常</span><br><span class="line">write(&apos;123&apos;) // 报错</span><br><span class="line">这是由于write是相当于window.write；而document.write下面应该会用到this对象，</span><br><span class="line">所以会报错</span><br><span class="line">应当改成window.write(document, &apos;123&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="答案4"><a href="#答案4" class="headerlink" title="答案4"></a>答案4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(getName()) // &apos;A&apos;  this === window</span><br><span class="line">console.log(a()) // &apos;A&apos; this === window</span><br><span class="line">console.log(a === arguments[0]) // true</span><br><span class="line">console.log(arguments[0]()) // undefined this 为argument对象</span><br></pre></td></tr></table></figure>
+<h4 id="答案5"><a href="#答案5" class="headerlink" title="答案5"></a>答案5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">async1 end</span><br><span class="line">script end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br><span class="line">这一块跟异步有关</span><br><span class="line">先同步，后异步，在回调。还有promise机制</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端面试/" rel="tag"># 前端面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/vue-1/" rel="next" title="vue采坑记录">
+                <i class="fa fa-chevron-left"></i> vue采坑记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/11/websocket/" rel="prev" title="websock(AMQ)通信-前端">
+                websock(AMQ)通信-前端 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="DanielDemi" />
+            
+              <p class="site-author-name" itemprop="name">DanielDemi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#这边列举了5个前端经典的面试题"><span class="nav-number">1.</span> <span class="nav-text">这边列举了5个前端经典的面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目1"><span class="nav-number">1.1.</span> <span class="nav-text">题目1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目2"><span class="nav-number">1.2.</span> <span class="nav-text">题目2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目3"><span class="nav-number">1.3.</span> <span class="nav-text">题目3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目4"><span class="nav-number">1.4.</span> <span class="nav-text">题目4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目5"><span class="nav-number">1.5.</span> <span class="nav-text">题目5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案1"><span class="nav-number">1.6.</span> <span class="nav-text">答案1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案2"><span class="nav-number">1.7.</span> <span class="nav-text">答案2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案3"><span class="nav-number">1.8.</span> <span class="nav-text">答案3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案4"><span class="nav-number">1.9.</span> <span class="nav-text">答案4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案5"><span class="nav-number">1.10.</span> <span class="nav-text">答案5</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DanielDemi</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

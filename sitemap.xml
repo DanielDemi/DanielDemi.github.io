@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://danieldemi.com/2018/05/30/vue-1/</loc>
+    <loc>http://danieldemi.com/2018/06/11/websocket/</loc>
     
-    <lastmod>2018-06-07T15:09:12.473Z</lastmod>
+    <lastmod>2018-06-11T14:31:17.571Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://danieldemi.com/2018/06/11/interview-1/</loc>
+    
+    <lastmod>2018-06-11T14:29:40.697Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
+    
+    <lastmod>2018-06-10T04:10:05.026Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://danieldemi.com/2018/05/27/learn-jquery-4/</loc>
+    
+    <lastmod>2018-06-10T03:53:23.931Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://danieldemi.com/2018/05/27/learn-jquery-3/</loc>
     
-    <lastmod>2018-06-07T14:47:03.237Z</lastmod>
+    <lastmod>2018-06-10T02:48:33.821Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://danieldemi.com/2018/05/30/vue-1/</loc>
+    
+    <lastmod>2018-06-07T15:09:12.473Z</lastmod>
     
   </url>
   

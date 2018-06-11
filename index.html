@@ -260,6 +260,419 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/06/11/websocket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/websocket/" itemprop="url">websock(AMQ)通信-前端</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T22:30:28+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/websocket/" itemprop="url" rel="index">
+                    <span itemprop="name">websocket</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###服务端和客户端之间的通信<br>前端开发经常会依赖后端，那么如果后端服务器还没做好推送服务器，那么前端该如何呢。<br>最简单的就是自己模拟一个服务器，用node来搭建，这边只简单介绍搭建的过程</p>
+<p>####node搭建服务器</p>
+<h5 id="1-选取websocket插件进行开发"><a href="#1-选取websocket插件进行开发" class="headerlink" title="1.选取websocket插件进行开发"></a>1.选取websocket插件进行开发</h5><p>按照如下步骤进行开发<br>在命令台中输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">npm init -y </span><br><span class="line">npm i websocket -S</span><br><span class="line">```</span><br><span class="line">安装完websocket插件后就可以搭建服务器了，首先新建一个app.js，并且代码如下</span><br><span class="line">```</span><br><span class="line">var webSocketsServerPort = 3002</span><br><span class="line">var webSocketServer = require(&apos;websocket&apos;).server</span><br><span class="line">var http = require(&apos;http&apos;)</span><br><span class="line"></span><br><span class="line">var server = http.createServer(function(req, res) &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">server.listen(webSocketsServerPort, function() &#123;</span><br><span class="line">    console.log((new Date()) + &quot;Server is listening on port &quot; + webSocketsServerPort)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * websock server</span><br><span class="line"> */</span><br><span class="line">var wsServer = new webSocketServer(&#123;</span><br><span class="line">    httpServer: server</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">wsServer.on(&apos;request&apos;, function(request) &#123;</span><br><span class="line">    var connection = request.accept(null, request.origin); </span><br><span class="line">    connection.on(&apos;message&apos;, function(message) &#123;</span><br><span class="line">        console.log(&apos;message&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    connection.on(&apos;close&apos;, function(connection) &#123;</span><br><span class="line">        console.log(&apos;close&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">```</span><br><span class="line">这样一个简易的服务器已经搭建完成。可以通过客户端进行测试(客户端代码见后面)</span><br><span class="line"></span><br><span class="line">##### 2.选取faye-websocket插件进行开发</span><br><span class="line">在命令台中输入以下命令</span><br></pre></td></tr></table></figure></p>
+<p>npm init -y<br>npm i faye-websocket-S<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这种方式更简单了。代码如下</span><br></pre></td></tr></table></figure></p>
+<p>var WebSocket = require(‘faye-websocket’),<br>    http      = require(‘http’);</p>
+<p>var server = http.createServer();</p>
+<p>server.on(‘upgrade’, function(request, socket, body) {<br>  if (WebSocket.isWebSocket(request)) {<br>    var ws = new WebSocket(request, socket, body);</p>
+<pre><code>ws.on(&apos;message&apos;, function(event) {
+  ws.send(event.data);
+});
+
+ws.on(&apos;close&apos;, function(event) {
+  console.log(&apos;close&apos;, event.code, event.reason);
+  ws = null;
+});
+</code></pre><p>  }<br>});</p>
+<p>server.listen(3002);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 3.选取socket.io插件进行开发</span><br><span class="line">该插件依赖于express</span><br><span class="line">命令如下</span><br></pre></td></tr></table></figure></p>
+<p>express -e node-js-socketio // express模板安装<br>npm i // 安装express插件<br>npm i socket.io -S // 安装socket.io<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.js文件改成如下代码</span><br></pre></td></tr></table></figure></p>
+<p>var app = require(‘express’)()<br>  , server = require(‘http’).createServer(app)<br>  , io = require(‘socket.io’).listen(server);</p>
+<p>server.listen(3002);</p>
+<p>app.get(‘/‘, function (req, res) {<br>  res.sendfile(__dirname + ‘/client/index.html’);<br>});</p>
+<p>io.sockets.on(‘connection’, function (socket) {<br>  socket.emit(‘news’, { hello: ‘world’ });<br>  socket.on(‘my other event’, function (data) {<br>    console.log(data);<br>  });<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">至此 服务器搭建已经完成(还有一种是基于stomp.js,目前还没弄清楚node如何搭建，等知道后在补充)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 客户端（即浏览器）调用服务器</span><br><span class="line">##### 1.简单的demo如下</span><br></pre></td></tr></table></figure></p>
+<html>
+
+<body><br>    <div id="output"></div><br>    <script><br>    function checkBrowser() {<br>        if (window.WebSocket) {<br>            log(“This browser supports WebSocket!”);<br>        } else {<br>            log(“This browser does not support WebSocket.”);<br>        }<br>    }<br><br>    function setup() {<br>        var wsServer = ‘ws://localhost:3002’;<br>        var ws = new WebSocket(wsServer);<br><br>        ws.onopen = function(e) {<br>            log(“Connected to WebSocket server.”, e);<br>            sendMessage(“Conan”);<br>        };<br><br>        ws.onclose = function(e) {<br>            log(“Disconnected”, e);<br>        };<br><br>        ws.onmessage = function(e) {<br>            log(“RECEIVED: “ + e.data, e);<br>            ws.close();<br>        }<br><br>        ws.onerror = function(e) {<br>            log(‘Error occured: ‘ + e.data, e);<br>        };<br><br>        var sendMessage = function(msg) {<br>            ws.send(msg);<br>            log(“SEND : “ + msg);<br>        }<br>    }<br><br>    function log(s, e) {<br>        var output = document.getElementById(“output”);<br>        var p = document.createElement(“p”);<br>        p.style.wordWrap = “break-word”;<br>        p.style.padding = “10px”;<br>        p.style.background = “#eee”;<br>        p.textContent = “LOG : “ + s;<br>        output.appendChild(p);<br>        console.log(“LOG : “ + s, e);<br>    }<br><br>    checkBrowser();<br>    setup();<br>    </script><br></body>
+
+<p></p></html><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">##### 2.基于express的socket.io的demo如下</span><br></pre></td></tr></table></figure><p></p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<p><html></html></p>
+<p><head></head></p>
+<p><title>socket.io</title><br></p>
+<p><body></body></p>
+<p></p><h1>socket.io</h1><p></p>
+<p>Welcome to socket.io</p>
+
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script></p>
+<p><script><br>var socket = io.connect(‘<a href="http://localhost:3002&#39;)">http://localhost:3002&#39;)</a>;<br>socket.on(‘news’, function (data) {<br>console.log(data);<br>socket.emit(‘my other event’, { my: ‘data’ });<br>});<br></script><br><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">####3 基于AMQ的demo(目前还不知道服务器如何搭建，但客户端还是可以用的)</span><br><span class="line">demo里放了3种模式，主要就是Queue和topic，消费和发布</span><br><span class="line">Queue和topic的区别是一对多和多对多（QUEUE发送一个人消息之后，就消失了，而topic可以发送多个人）</span><br></pre></td></tr></table></figure></p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    <title>Document</title><br></head></p>
+<body>
+
+<pre><code>&lt;script type=&quot;stompjs&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+// 3种模式   
+// QUeue是只有1对多模式，，topic多对多模式
+// 1.消息发布者模式
+var client = Stomp.overTCP(&apos;localhost&apos;, 61613);
+// uncomment to print out the STOMP frames
+
+var connectCallback = function(frame) {
+    var subscription = client.subscribe(&apos;/topic/FirstQueue&apos;, onMessage);
+    //subscription.unsubscribe();
+};
+
+var onMessage = function(message){
+    if (message.body) {
+      console.log(&quot;got message with body &quot; + message.body)
+    } else {
+      console.log(&quot;got empty message&quot;);
+    }
+};
+
+var errorCallback = function(error){
+    console.log(error.headers.message);
+};
+
+client.connect(&apos;admin&apos;, &apos;admin&apos;, connectCallback,errorCallback);
+
+// 2.Queue消息消费者
+var Stomp = require(&apos;stompjs&apos;);
+
+// Use raw TCP sockets
+var client = Stomp.overTCP(&apos;localhost&apos;, 61613);
+// uncomment to print out the STOMP frames
+// client.debug = console.log;
+
+var connectCallback = function(frame) {
+    var subscription = client.subscribe(&apos;/queue/FirstQueue&apos;, onMessage);
+    //subscription.unsubscribe();
+};
+
+var onMessage = function(message){
+    if (message.body) {
+      console.log(&quot;got message with body &quot; + message.body)
+    } else {
+      console.log(&quot;got empty message&quot;);
+    }
+};
+
+var errorCallback = function(error){
+    console.log(error.headers.message);
+};
+
+client.connect(&apos;admin&apos;, &apos;admin&apos;, connectCallback,errorCallback);
+// 3.topic 消息订阅者模式
+// Use raw TCP sockets
+var client = Stomp.overTCP(&apos;localhost&apos;, 61613);
+// uncomment to print out the STOMP frames
+// client.debug = console.log;
+
+var connectCallback = function(frame) {
+    var subscription = client.subscribe(&apos;/topic/FirstQueue&apos;, onMessage);
+    //subscription.unsubscribe();
+};
+
+var onMessage = function(message){
+    if (message.body) {
+      console.log(&quot;got message with body &quot; + message.body)
+    } else {
+      console.log(&quot;got empty message&quot;);
+    }
+};
+
+var errorCallback = function(error){
+    console.log(error.headers.message);
+};
+
+client.connect(&apos;admin&apos;, &apos;admin&apos;, connectCallback,errorCallback);
+&lt;/script&gt;
+</code></pre><p></p></body><br><br><code>`</code><p></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/06/11/interview-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/interview-1/" itemprop="url">前端面试经典题目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T22:29:06+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端面试/" itemprop="url" rel="index">
+                    <span itemprop="name">前端面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="这边列举了5个前端经典的面试题"><a href="#这边列举了5个前端经典的面试题" class="headerlink" title="这边列举了5个前端经典的面试题"></a>这边列举了5个前端经典的面试题</h3><p>首先我们来看一下题目，都各自思考一下，自己是否能够做出来。然后再跟后面的答案对比一下</p>
+<h4 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;n:1&#125;</span><br><span class="line">var b = &#123;n:2&#125;</span><br><span class="line">b.x = a = &#123;n:3&#125;</span><br><span class="line">console.log(b.x)</span><br><span class="line">a.x = a = &#123;n:3&#125;</span><br><span class="line">console.log(a.x)</span><br></pre></td></tr></table></figure>
+<h4 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">（1）</span><br><span class="line">var start = new Date()</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(new Date() -start)</span><br><span class="line">&#125;, 500)</span><br><span class="line">（2）</span><br><span class="line">var start = new Date()</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(new Date() -start)</span><br><span class="line">&#125;, 500)</span><br><span class="line"></span><br><span class="line">while((new Date() - start &lt;= 1000) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var log = console.log</span><br><span class="line">var hint = window.alert</span><br><span class="line">var write = document.write</span><br><span class="line">log(&apos;123&apos;)</span><br><span class="line">hint(&apos;123&apos;)</span><br><span class="line">wirte(&apos;123&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="题目4"><a href="#题目4" class="headerlink" title="题目4"></a>题目4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var name = &apos;A&apos;</span><br><span class="line">function getName() &#123;</span><br><span class="line">    return this.name</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: &apos;B&apos;,</span><br><span class="line">    getName: function() &#123;</span><br><span class="line">        return this.name</span><br><span class="line">    &#125;,</span><br><span class="line">    showName:function(a) &#123;</span><br><span class="line">        console.log(getName())</span><br><span class="line">        console.log(a())</span><br><span class="line">        console.log(a === arguments[0])</span><br><span class="line">        console.log(arguments[0]())</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">obj .showName(getName, 1)</span><br></pre></td></tr></table></figure>
+<h4 id="题目5"><a href="#题目5" class="headerlink" title="题目5"></a>题目5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">async function async1() &#123;</span><br><span class="line">    console.log(&apos;async1 start&apos;)</span><br><span class="line">    await async2()</span><br><span class="line">    console.log(&apos;async1 end&apos;)</span><br><span class="line">&#125;</span><br><span class="line">async function async2() &#123;</span><br><span class="line">    console.log(async2())</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;script start&apos;)</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;)</span><br><span class="line">&#125;, 0)</span><br><span class="line">async1()</span><br><span class="line">new Promise(function (resolve) &#123;</span><br><span class="line">    console.log(&apos;promise1&apos;)</span><br><span class="line">    resolve()</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;promise2&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;script end&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="答案1"><a href="#答案1" class="headerlink" title="答案1"></a>答案1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(b.x)   // &#123;n:3&#125;</span><br><span class="line">console.log(a.x)   // undefined</span><br><span class="line">这是跟js的优先级有关的 .的优先级最高，因此先计算左边的b.x,a.x</span><br></pre></td></tr></table></figure>
+<h4 id="答案2"><a href="#答案2" class="headerlink" title="答案2"></a>答案2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(1)</span><br><span class="line">console.log(new Date() -start)  // 不是一定500,而是大于等于500</span><br><span class="line">主要是由于定时器的时间不一定准，这个跟异步的机制有关</span><br><span class="line">当定时器的时间到了之后，执行函数会进入栈中，会根据栈中的执行任务，</span><br><span class="line">依次执行（不懂的可以学习一下异步机制）</span><br><span class="line">(2)</span><br><span class="line">console.log(new Date() -start)  // 大于等于1000</span><br><span class="line">由于是单线程</span><br></pre></td></tr></table></figure>
+<h4 id="答案3"><a href="#答案3" class="headerlink" title="答案3"></a>答案3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log(&apos;123&apos;) // 正常</span><br><span class="line">hint(&apos;123&apos;) // 正常</span><br><span class="line">write(&apos;123&apos;) // 报错</span><br><span class="line">这是由于write是相当于window.write；而document.write下面应该会用到this对象，</span><br><span class="line">所以会报错</span><br><span class="line">应当改成window.write(document, &apos;123&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="答案4"><a href="#答案4" class="headerlink" title="答案4"></a>答案4</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(getName()) // &apos;A&apos;  this === window</span><br><span class="line">console.log(a()) // &apos;A&apos; this === window</span><br><span class="line">console.log(a === arguments[0]) // true</span><br><span class="line">console.log(arguments[0]()) // undefined this 为argument对象</span><br></pre></td></tr></table></figure>
+<h4 id="答案5"><a href="#答案5" class="headerlink" title="答案5"></a>答案5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">async1 end</span><br><span class="line">script end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br><span class="line">这一块跟异步有关</span><br><span class="line">先同步，后异步，在回调。还有promise机制</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/30/vue-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -428,6 +841,294 @@ parent /deep/ child {}
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/27/learn-jquery-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/27/learn-jquery-4/" itemprop="url">学习jquery源码-4 （jquery-2.0.3）（不兼容ie6,7,8）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T15:29:14+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="jquery代码285-347行-extend-jQuery的继承方法（可用于插件和方法的扩展）"><a href="#jquery代码285-347行-extend-jQuery的继承方法（可用于插件和方法的扩展）" class="headerlink" title="jquery代码285-347行 extend: jQuery的继承方法（可用于插件和方法的扩展）"></a>jquery代码285-347行 extend: jQuery的继承方法（可用于插件和方法的扩展）</h2><p>首先我们来看一下如何使用extend的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">$.extend()</span><br><span class="line">$.fn.extend()</span><br><span class="line"></span><br><span class="line">1. 扩展工具方法</span><br><span class="line">$.extend(&#123;</span><br><span class="line">    aaa: function() &#123;</span><br><span class="line">        console.log(111)</span><br><span class="line">    &#125;,</span><br><span class="line">    bbb: function() &#123;</span><br><span class="line">        console.log(222)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">调用：</span><br><span class="line">$.aaa()</span><br><span class="line">$.bbb()</span><br><span class="line">2.扩展jq实例方法</span><br><span class="line">$.fn.extend(&#123;</span><br><span class="line">    aaa: function() &#123;</span><br><span class="line">        console.log(111)</span><br><span class="line">    &#125;,</span><br><span class="line">    bbb: function() &#123;</span><br><span class="line">        console.log(222)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">调用：</span><br><span class="line">$().aaa()</span><br><span class="line">$().bbb()</span><br><span class="line">3.扩展属性</span><br><span class="line">var a = &#123;&#125;</span><br><span class="line">$.extend(&apos;a&apos;, &#123;name: &apos;xxx&apos;&#125;)</span><br><span class="line"></span><br><span class="line">4.深拷贝和浅拷贝</span><br><span class="line">var a = &#123;&#125;</span><br><span class="line">var b = &#123;name: &apos;hello&apos;, age: &#123;t: 10&#125;&#125;</span><br><span class="line"></span><br><span class="line">$.extend(a, b)</span><br><span class="line"></span><br><span class="line">a.name = &apos;hi&apos;</span><br><span class="line">console.log(b.name) // hello 不受影响</span><br><span class="line">a.age.t = 20;</span><br><span class="line">console.log(b.age.t) // 20 受影响</span><br><span class="line">这主要是由于$.extend默认是浅拷贝</span><br><span class="line"></span><br><span class="line">如果需要深拷贝那么需要这么使用</span><br><span class="line">$.extend(true, a, b)</span><br><span class="line">a.age.t = 20;</span><br><span class="line">console.log(b.age.t) // 10 不受影响</span><br></pre></td></tr></table></figure></p>
+<p>接下来开始看源码：先简单看下架构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend=jQuery.fn.extend = function() &#123;</span><br><span class="line">    // 定义一些变量</span><br><span class="line">    if() &#123;&#125;  // 看是不是深拷贝情况</span><br><span class="line"></span><br><span class="line">    if() &#123;&#125;  // 看参数正确不</span><br><span class="line"></span><br><span class="line">    if() &#123;&#125;  // 看是不是插件情况</span><br><span class="line"></span><br><span class="line">    for() &#123; // 可能多个对象</span><br><span class="line">        if() &#123;&#125;  // 防止循环引用</span><br><span class="line">        if() &#123;&#125;  // 深拷贝</span><br><span class="line">        else if () &#123;&#125; // 浅拷贝</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是源码及解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend = jQuery.fn.extend = function() &#123;</span><br><span class="line">	var options, name, src, copy, copyIsArray, clone,</span><br><span class="line">		target = arguments[0] || &#123;&#125;,</span><br><span class="line">		i = 1,</span><br><span class="line">		length = arguments.length,</span><br><span class="line">		deep = false;</span><br><span class="line"></span><br><span class="line">	// 判断第一个参数是否为boolean，用于检测是否为深拷贝</span><br><span class="line">	if ( typeof target === &quot;boolean&quot; ) &#123;</span><br><span class="line">		deep = target;  // 是否深拷贝</span><br><span class="line">		target = arguments[1] || &#123;&#125;; // 目标对象</span><br><span class="line">		i = 2;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 目标元素不是对象或不是函数时，默认变为空的json</span><br><span class="line">	if ( typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction(target) ) &#123;</span><br><span class="line">		target = &#123;&#125;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 这边判断是不是插件</span><br><span class="line">	if ( length === i ) &#123;</span><br><span class="line">        // $.extend和$.fn.extend的this是不同的，因此扩展使用方式也就不同了</span><br><span class="line">		target = this;</span><br><span class="line">		--i;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">		// 判断后面参数是否有值</span><br><span class="line">		if ( (options = arguments[ i ]) != null ) &#123;</span><br><span class="line">			// 遍历对象属性</span><br><span class="line">			for ( name in options ) &#123;</span><br><span class="line">				src = target[ name ];</span><br><span class="line">				copy = options[ name ];</span><br><span class="line"></span><br><span class="line">				// 碰到循环引用时跳出；如a = &#123;&#125; b = &#123;x: a&#125; $.entend(a,b)</span><br><span class="line">				if ( target === copy ) &#123;</span><br><span class="line">					continue;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				// 深拷贝，拷贝的值是数组或对象</span><br><span class="line">				if ( deep &amp;&amp; copy &amp;&amp; ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) &#123;</span><br><span class="line">					if ( copyIsArray ) &#123;</span><br><span class="line">						copyIsArray = false;</span><br><span class="line">						clone = src &amp;&amp; jQuery.isArray(src) ? src : []; // 这边判断下原对象是否包含该属性，如果有则在原属性上进行扩展</span><br><span class="line">    				&#125; else &#123;</span><br><span class="line">						clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : &#123;&#125;;</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					// 在进行一次拷贝</span><br><span class="line">					target[ name ] = jQuery.extend( deep, clone, copy );</span><br><span class="line"></span><br><span class="line">				// 浅拷贝，直接赋值</span><br><span class="line">				&#125; else if ( copy !== undefined ) &#123;</span><br><span class="line">					target[ name ] = copy;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return target;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/27/learn-jquery-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DanielDemi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DanielDemi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/27/learn-jquery-5/" itemprop="url">学习jquery源码-5 （jquery-2.0.3）（不兼容ie6,7,8）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T15:29:14+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="jquery代码349-817行-扩展一些工具方法（静态方法和静态属性）"><a href="#jquery代码349-817行-扩展一些工具方法（静态方法和静态属性）" class="headerlink" title="jquery代码349-817行 扩展一些工具方法（静态方法和静态属性）"></a>jquery代码349-817行 扩展一些工具方法（静态方法和静态属性）</h2><p>使用之前$.extend方法来扩展方法，供jquery内部调用方便</p>
+<p>首先列举以下属性和方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend(&#123;</span><br><span class="line">    expando: 生成唯一JQ字符串（内部）,</span><br><span class="line">    noConfict(): 防止冲突,</span><br><span class="line">    isReady： DOM是否价值完（内部）</span><br><span class="line">    readyWait: 等待多时文件的计数器（内部）</span><br><span class="line">    holdReady(): 推迟DOM触发</span><br><span class="line">    isFunction(): 是否为函数</span><br><span class="line">    isArray(): 是否为数组</span><br><span class="line">    isWindow(): 是否为window</span><br><span class="line">    isNumeric: 是否欸数字</span><br><span class="line">    type() : 判断数据类型</span><br><span class="line">    isPlainObject():  是否为对象自变量</span><br><span class="line">    isEmptyObject(): 是否为空的对象</span><br><span class="line">    error(): 抛出异常</span><br><span class="line">    parseHTML(): 解析节点</span><br><span class="line">    parseJSON(): 解析JSON</span><br><span class="line">    noop(): 空函数</span><br><span class="line">    gl</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>接下来是源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend(&#123;</span><br><span class="line">	// 唯一jQuery字符串</span><br><span class="line">	expando: &quot;jQuery&quot; + ( core_version + Math.random() ).replace( /\D/g, &quot;&quot; ),</span><br><span class="line"></span><br><span class="line">	noConflict: function( deep ) &#123;</span><br><span class="line">		if ( window.$ === jQuery ) &#123;</span><br><span class="line">			window.$ = _$;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if ( deep &amp;&amp; window.jQuery === jQuery ) &#123;</span><br><span class="line">			window.jQuery = _jQuery;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return jQuery;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// Is the DOM ready to be used? Set to true once it occurs.</span><br><span class="line">	isReady: false,</span><br><span class="line"></span><br><span class="line">	// A counter to track how many items to wait for before</span><br><span class="line">	// the ready event fires. See #6781</span><br><span class="line">	readyWait: 1,</span><br><span class="line"></span><br><span class="line">	// Hold (or release) the ready event</span><br><span class="line">	holdReady: function( hold ) &#123;</span><br><span class="line">		if ( hold ) &#123;</span><br><span class="line">			jQuery.readyWait++;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			jQuery.ready( true );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// Handle when the DOM is ready</span><br><span class="line">	ready: function( wait ) &#123;</span><br><span class="line"></span><br><span class="line">		// Abort if there are pending holds or we&apos;re already ready</span><br><span class="line">		if ( wait === true ? --jQuery.readyWait : jQuery.isReady ) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Remember that the DOM is ready</span><br><span class="line">		jQuery.isReady = true;</span><br><span class="line"></span><br><span class="line">		// If a normal DOM Ready event fired, decrement, and wait if need be</span><br><span class="line">		if ( wait !== true &amp;&amp; --jQuery.readyWait &gt; 0 ) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// If there are functions bound, to execute</span><br><span class="line">		readyList.resolveWith( document, [ jQuery ] );</span><br><span class="line"></span><br><span class="line">		// Trigger any bound ready events</span><br><span class="line">		if ( jQuery.fn.trigger ) &#123;</span><br><span class="line">			jQuery( document ).trigger(&quot;ready&quot;).off(&quot;ready&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// See test/unit/core.js for details concerning isFunction.</span><br><span class="line">	// Since version 1.3, DOM methods and functions like alert</span><br><span class="line">	// aren&apos;t supported. They return false on IE (#2968).</span><br><span class="line">	isFunction: function( obj ) &#123;</span><br><span class="line">		return jQuery.type(obj) === &quot;function&quot;;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	isArray: Array.isArray,</span><br><span class="line"></span><br><span class="line">	isWindow: function( obj ) &#123;</span><br><span class="line">		return obj != null &amp;&amp; obj === obj.window;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	isNumeric: function( obj ) &#123;</span><br><span class="line">		return !isNaN( parseFloat(obj) ) &amp;&amp; isFinite( obj );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	type: function( obj ) &#123;</span><br><span class="line">		if ( obj == null ) &#123;</span><br><span class="line">			return String( obj );</span><br><span class="line">		&#125;</span><br><span class="line">		// Support: Safari &lt;= 5.1 (functionish RegExp)</span><br><span class="line">		return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot; ?</span><br><span class="line">			class2type[ core_toString.call(obj) ] || &quot;object&quot; :</span><br><span class="line">			typeof obj;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	isPlainObject: function( obj ) &#123;</span><br><span class="line">		// Not plain objects:</span><br><span class="line">		// - Any object or value whose internal [[Class]] property is not &quot;[object Object]&quot;</span><br><span class="line">		// - DOM nodes</span><br><span class="line">		// - window</span><br><span class="line">		if ( jQuery.type( obj ) !== &quot;object&quot; || obj.nodeType || jQuery.isWindow( obj ) ) &#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Support: Firefox &lt;20</span><br><span class="line">		// The try/catch suppresses exceptions thrown when attempting to access</span><br><span class="line">		// the &quot;constructor&quot; property of certain host objects, ie. |window.location|</span><br><span class="line">		// https://bugzilla.mozilla.org/show_bug.cgi?id=814622</span><br><span class="line">		try &#123;</span><br><span class="line">			if ( obj.constructor &amp;&amp;</span><br><span class="line">					!core_hasOwn.call( obj.constructor.prototype, &quot;isPrototypeOf&quot; ) ) &#123;</span><br><span class="line">				return false;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; catch ( e ) &#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// If the function hasn&apos;t returned already, we&apos;re confident that</span><br><span class="line">		// |obj| is a plain object, created by &#123;&#125; or constructed with new Object</span><br><span class="line">		return true;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	isEmptyObject: function( obj ) &#123;</span><br><span class="line">		var name;</span><br><span class="line">		for ( name in obj ) &#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	error: function( msg ) &#123;</span><br><span class="line">		throw new Error( msg );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// data: string of html</span><br><span class="line">	// context (optional): If specified, the fragment will be created in this context, defaults to document</span><br><span class="line">	// keepScripts (optional): If true, will include scripts passed in the html string</span><br><span class="line">	parseHTML: function( data, context, keepScripts ) &#123;</span><br><span class="line">		if ( !data || typeof data !== &quot;string&quot; ) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		if ( typeof context === &quot;boolean&quot; ) &#123;</span><br><span class="line">			keepScripts = context;</span><br><span class="line">			context = false;</span><br><span class="line">		&#125;</span><br><span class="line">		context = context || document;</span><br><span class="line"></span><br><span class="line">		var parsed = rsingleTag.exec( data ),</span><br><span class="line">			scripts = !keepScripts &amp;&amp; [];</span><br><span class="line"></span><br><span class="line">		// Single tag</span><br><span class="line">		if ( parsed ) &#123;</span><br><span class="line">			return [ context.createElement( parsed[1] ) ];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		parsed = jQuery.buildFragment( [ data ], context, scripts );</span><br><span class="line"></span><br><span class="line">		if ( scripts ) &#123;</span><br><span class="line">			jQuery( scripts ).remove();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return jQuery.merge( [], parsed.childNodes );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	parseJSON: JSON.parse,</span><br><span class="line"></span><br><span class="line">	// Cross-browser xml parsing</span><br><span class="line">	parseXML: function( data ) &#123;</span><br><span class="line">		var xml, tmp;</span><br><span class="line">		if ( !data || typeof data !== &quot;string&quot; ) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Support: IE9</span><br><span class="line">		try &#123;</span><br><span class="line">			tmp = new DOMParser();</span><br><span class="line">			xml = tmp.parseFromString( data , &quot;text/xml&quot; );</span><br><span class="line">		&#125; catch ( e ) &#123;</span><br><span class="line">			xml = undefined;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if ( !xml || xml.getElementsByTagName( &quot;parsererror&quot; ).length ) &#123;</span><br><span class="line">			jQuery.error( &quot;Invalid XML: &quot; + data );</span><br><span class="line">		&#125;</span><br><span class="line">		return xml;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	noop: function() &#123;&#125;,</span><br><span class="line"></span><br><span class="line">	// Evaluates a script in a global context</span><br><span class="line">	globalEval: function( code ) &#123;</span><br><span class="line">		var script,</span><br><span class="line">				indirect = eval;</span><br><span class="line"></span><br><span class="line">		code = jQuery.trim( code );</span><br><span class="line"></span><br><span class="line">		if ( code ) &#123;</span><br><span class="line">			// If the code includes a valid, prologue position</span><br><span class="line">			// strict mode pragma, execute code by injecting a</span><br><span class="line">			// script tag into the document.</span><br><span class="line">			if ( code.indexOf(&quot;use strict&quot;) === 1 ) &#123;</span><br><span class="line">				script = document.createElement(&quot;script&quot;);</span><br><span class="line">				script.text = code;</span><br><span class="line">				document.head.appendChild( script ).parentNode.removeChild( script );</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">			// Otherwise, avoid the DOM node creation, insertion</span><br><span class="line">			// and removal by using an indirect global eval</span><br><span class="line">				indirect( code );</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// Convert dashed to camelCase; used by the css and data modules</span><br><span class="line">	// Microsoft forgot to hump their vendor prefix (#9572)</span><br><span class="line">	camelCase: function( string ) &#123;</span><br><span class="line">		return string.replace( rmsPrefix, &quot;ms-&quot; ).replace( rdashAlpha, fcamelCase );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	nodeName: function( elem, name ) &#123;</span><br><span class="line">		return elem.nodeName &amp;&amp; elem.nodeName.toLowerCase() === name.toLowerCase();</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// args is for internal usage only</span><br><span class="line">	each: function( obj, callback, args ) &#123;</span><br><span class="line">		var value,</span><br><span class="line">			i = 0,</span><br><span class="line">			length = obj.length,</span><br><span class="line">			isArray = isArraylike( obj );</span><br><span class="line"></span><br><span class="line">		if ( args ) &#123;</span><br><span class="line">			if ( isArray ) &#123;</span><br><span class="line">				for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">					value = callback.apply( obj[ i ], args );</span><br><span class="line"></span><br><span class="line">					if ( value === false ) &#123;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				for ( i in obj ) &#123;</span><br><span class="line">					value = callback.apply( obj[ i ], args );</span><br><span class="line"></span><br><span class="line">					if ( value === false ) &#123;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		// A special, fast, case for the most common use of each</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			if ( isArray ) &#123;</span><br><span class="line">				for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">					value = callback.call( obj[ i ], i, obj[ i ] );</span><br><span class="line"></span><br><span class="line">					if ( value === false ) &#123;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				for ( i in obj ) &#123;</span><br><span class="line">					value = callback.call( obj[ i ], i, obj[ i ] );</span><br><span class="line"></span><br><span class="line">					if ( value === false ) &#123;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return obj;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	trim: function( text ) &#123;</span><br><span class="line">		return text == null ? &quot;&quot; : core_trim.call( text );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// results is for internal usage only</span><br><span class="line">	makeArray: function( arr, results ) &#123;</span><br><span class="line">		var ret = results || [];</span><br><span class="line"></span><br><span class="line">		if ( arr != null ) &#123;</span><br><span class="line">			if ( isArraylike( Object(arr) ) ) &#123;</span><br><span class="line">				jQuery.merge( ret,</span><br><span class="line">					typeof arr === &quot;string&quot; ?</span><br><span class="line">					[ arr ] : arr</span><br><span class="line">				);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				core_push.call( ret, arr );</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return ret;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	inArray: function( elem, arr, i ) &#123;</span><br><span class="line">		return arr == null ? -1 : core_indexOf.call( arr, elem, i );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	merge: function( first, second ) &#123;</span><br><span class="line">		var l = second.length,</span><br><span class="line">			i = first.length,</span><br><span class="line">			j = 0;</span><br><span class="line"></span><br><span class="line">		if ( typeof l === &quot;number&quot; ) &#123;</span><br><span class="line">			for ( ; j &lt; l; j++ ) &#123;</span><br><span class="line">				first[ i++ ] = second[ j ];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			while ( second[j] !== undefined ) &#123;</span><br><span class="line">				first[ i++ ] = second[ j++ ];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		first.length = i;</span><br><span class="line"></span><br><span class="line">		return first;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	grep: function( elems, callback, inv ) &#123;</span><br><span class="line">		var retVal,</span><br><span class="line">			ret = [],</span><br><span class="line">			i = 0,</span><br><span class="line">			length = elems.length;</span><br><span class="line">		inv = !!inv;</span><br><span class="line"></span><br><span class="line">		// Go through the array, only saving the items</span><br><span class="line">		// that pass the validator function</span><br><span class="line">		for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">			retVal = !!callback( elems[ i ], i );</span><br><span class="line">			if ( inv !== retVal ) &#123;</span><br><span class="line">				ret.push( elems[ i ] );</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return ret;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// arg is for internal usage only</span><br><span class="line">	map: function( elems, callback, arg ) &#123;</span><br><span class="line">		var value,</span><br><span class="line">			i = 0,</span><br><span class="line">			length = elems.length,</span><br><span class="line">			isArray = isArraylike( elems ),</span><br><span class="line">			ret = [];</span><br><span class="line"></span><br><span class="line">		// Go through the array, translating each of the items to their</span><br><span class="line">		if ( isArray ) &#123;</span><br><span class="line">			for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">				value = callback( elems[ i ], i, arg );</span><br><span class="line"></span><br><span class="line">				if ( value != null ) &#123;</span><br><span class="line">					ret[ ret.length ] = value;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		// Go through every key on the object,</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			for ( i in elems ) &#123;</span><br><span class="line">				value = callback( elems[ i ], i, arg );</span><br><span class="line"></span><br><span class="line">				if ( value != null ) &#123;</span><br><span class="line">					ret[ ret.length ] = value;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Flatten any nested arrays</span><br><span class="line">		return core_concat.apply( [], ret );</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// A global GUID counter for objects</span><br><span class="line">	guid: 1,</span><br><span class="line"></span><br><span class="line">	// Bind a function to a context, optionally partially applying any</span><br><span class="line">	// arguments.</span><br><span class="line">	proxy: function( fn, context ) &#123;</span><br><span class="line">		var tmp, args, proxy;</span><br><span class="line"></span><br><span class="line">		if ( typeof context === &quot;string&quot; ) &#123;</span><br><span class="line">			tmp = fn[ context ];</span><br><span class="line">			context = fn;</span><br><span class="line">			fn = tmp;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Quick check to determine if target is callable, in the spec</span><br><span class="line">		// this throws a TypeError, but we will just return undefined.</span><br><span class="line">		if ( !jQuery.isFunction( fn ) ) &#123;</span><br><span class="line">			return undefined;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Simulated bind</span><br><span class="line">		args = core_slice.call( arguments, 2 );</span><br><span class="line">		proxy = function() &#123;</span><br><span class="line">			return fn.apply( context || this, args.concat( core_slice.call( arguments ) ) );</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		// Set the guid of unique handler to the same of original handler, so it can be removed</span><br><span class="line">		proxy.guid = fn.guid = fn.guid || jQuery.guid++;</span><br><span class="line"></span><br><span class="line">		return proxy;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	// Multifunctional method to get and set values of a collection</span><br><span class="line">	// The value/s can optionally be executed if it&apos;s a function</span><br><span class="line">	access: function( elems, fn, key, value, chainable, emptyGet, raw ) &#123;</span><br><span class="line">		var i = 0,</span><br><span class="line">			length = elems.length,</span><br><span class="line">			bulk = key == null;</span><br><span class="line"></span><br><span class="line">		// Sets many values</span><br><span class="line">		if ( jQuery.type( key ) === &quot;object&quot; ) &#123;</span><br><span class="line">			chainable = true;</span><br><span class="line">			for ( i in key ) &#123;</span><br><span class="line">				jQuery.access( elems, fn, i, key[i], true, emptyGet, raw );</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		// Sets one value</span><br><span class="line">		&#125; else if ( value !== undefined ) &#123;</span><br><span class="line">			chainable = true;</span><br><span class="line"></span><br><span class="line">			if ( !jQuery.isFunction( value ) ) &#123;</span><br><span class="line">				raw = true;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			if ( bulk ) &#123;</span><br><span class="line">				// Bulk operations run against the entire set</span><br><span class="line">				if ( raw ) &#123;</span><br><span class="line">					fn.call( elems, value );</span><br><span class="line">					fn = null;</span><br><span class="line"></span><br><span class="line">				// ...except when executing function values</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					bulk = fn;</span><br><span class="line">					fn = function( elem, key, value ) &#123;</span><br><span class="line">						return bulk.call( jQuery( elem ), value );</span><br><span class="line">					&#125;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			if ( fn ) &#123;</span><br><span class="line">				for ( ; i &lt; length; i++ ) &#123;</span><br><span class="line">					fn( elems[i], key, raw ? value : value.call( elems[i], i, fn( elems[i], key ) ) );</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return chainable ?</span><br><span class="line">			elems :</span><br><span class="line"></span><br><span class="line">			// Gets</span><br><span class="line">			bulk ?</span><br><span class="line">				fn.call( elems ) :</span><br><span class="line">				length ? fn( elems[0], key ) : emptyGet;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	now: Date.now,</span><br><span class="line"></span><br><span class="line">	// A method for quickly swapping in/out CSS properties to get correct calculations.</span><br><span class="line">	// Note: this method belongs to the css module but it&apos;s needed here for the support module.</span><br><span class="line">	// If support gets modularized, this method should be moved back to the css module.</span><br><span class="line">	swap: function( elem, options, callback, args ) &#123;</span><br><span class="line">		var ret, name,</span><br><span class="line">			old = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">		// Remember the old values, and insert the new ones</span><br><span class="line">		for ( name in options ) &#123;</span><br><span class="line">			old[ name ] = elem.style[ name ];</span><br><span class="line">			elem.style[ name ] = options[ name ];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		ret = callback.apply( elem, args || [] );</span><br><span class="line"></span><br><span class="line">		// Revert the old values</span><br><span class="line">		for ( name in options ) &#123;</span><br><span class="line">			elem.style[ name ] = old[ name ];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/27/learn-jquery-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -527,7 +1228,7 @@ parent /deep/ child {}
 <h2 id="init-初始化和参数管理"><a href="#init-初始化和参数管理" class="headerlink" title="init(): 初始化和参数管理"></a>init(): 初始化和参数管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">// 源码：</span><br><span class="line">// 选择器selector 限制条件context 内部参数不对外暴露rootjQuery：$(document)</span><br><span class="line">// 通常我们选择元素是这样的$(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;) 这种事各类选择权选择元素</span><br><span class="line">// 另外一种是创建标签 $(&apos;&lt;li&gt;&apos;)  $(&apos;&lt;li&gt;1&lt;/li&gt;&apos;)  这种都是创建标签</span><br><span class="line">init: function( selector, context, rootjQuery ) &#123;</span><br><span class="line">    var match, elem;</span><br><span class="line"></span><br><span class="line">    // 对不正确的选择器进行处理: $(&quot;&quot;), $(null), $(undefined), $(false)</span><br><span class="line">    if ( !selector ) &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 处理字符串 如 $(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;)或  $(&apos;&lt;li&gt;&apos;)  $(&apos;&lt;li&gt;1&lt;/li&gt;&apos;)</span><br><span class="line">    if ( typeof selector === &quot;string&quot; ) &#123;</span><br><span class="line">        // 处理$(&apos;&lt;li&gt;&apos;)</span><br><span class="line">        if ( selector.charAt(0) === &quot;&lt;&quot; &amp;&amp; selector.charAt( selector.length - 1 ) === &quot;&gt;&quot; &amp;&amp; selector.length &gt;= 3 ) &#123;</span><br><span class="line">            // </span><br><span class="line">            match = [ null, selector, null ];</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 处理选择器 $(&apos;#div&apos;)  $(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;);此外还有不规则的标签如$(&apos;&lt;li&gt;hello&apos;)</span><br><span class="line">            // rquickExpr = /^(?:\s*(&lt;[\w\W]+&gt;)[^&gt;]*|#([\w-]*))$/ </span><br><span class="line">            // 用于匹配 $(&apos;#id&apos;) 和 $(&apos;&lt;li&gt;hello&apos;) 会有结果 match = []</span><br><span class="line">            // $(&apos;#id&apos;) match = [&apos;#id&apos;, null, &apos;id&apos;]</span><br><span class="line">            // $(&apos;&lt;li&gt;hello&apos;) match = [&apos;&lt;li&gt;hello&apos;, &apos;&lt;li&gt;&apos;, nill]</span><br><span class="line">            // 而$(&apos;.box&apos;)  $(&apos;div&apos;)  $(&apos;#div div.box&apos;)则会是match = null</span><br><span class="line">            match = rquickExpr.exec( selector );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 根据上面的处理match有3种情况</span><br><span class="line">        // 1.null</span><br><span class="line">        // 2.[&apos;#id&apos;, null, &apos;id&apos;]</span><br><span class="line">        // 3.[&apos;&lt;li&gt;hello&apos;, &lt;li&gt;, null]</span><br><span class="line">        // 4.[null, &lt;li&gt;, null]</span><br><span class="line"></span><br><span class="line">        // 2,4可以进入 ,为什么2可以进入，2的match[1]为null，因为id选择器不需要上下文限制，因此!context为真</span><br><span class="line">        if ( match &amp;&amp; (match[1] || !context) ) &#123;</span><br><span class="line"></span><br><span class="line">            // 4进入这里，就是标签 context只能是document，但是可以指定不同的document，如iframe下的</span><br><span class="line">            if ( match[1] ) &#123;</span><br><span class="line">                // 可能填写 document 或 $(document) 最终得到都是原生document</span><br><span class="line">                context = context instanceof jQuery ? context[0] : context;</span><br><span class="line"></span><br><span class="line">                // scripts is true for back-compat</span><br><span class="line">                // jQuery.parseHTML 把字符串转换成节点数组;见代码库init-1</span><br><span class="line">                // jQuery.merge 合并数组,类数组</span><br><span class="line">                // 这边返回this对象即为类数组</span><br><span class="line">                // &#123;</span><br><span class="line">                //    0：xxx</span><br><span class="line">                //    1: xxx</span><br><span class="line">                //    ...</span><br><span class="line">                //    length: n</span><br><span class="line">                // &#125;</span><br><span class="line">                jQuery.merge( this, jQuery.parseHTML(</span><br><span class="line">                    match[1],</span><br><span class="line">                    context &amp;&amp; context.nodeType ? context.ownerDocument || context : document,</span><br><span class="line">                    true</span><br><span class="line">                ) );</span><br><span class="line"></span><br><span class="line">                // 针对标签带属性的处理，如 $(&apos;&lt;li&gt;&apos;, &#123;title: &apos;tese&apos;, html:&apos;abcd&apos;&#125;)</span><br><span class="line">                // rsingleTag匹配单标签  jQuery.isPlainObject判断是否为对象</span><br><span class="line">                if ( rsingleTag.test( match[1] ) &amp;&amp; jQuery.isPlainObject( context ) ) &#123;</span><br><span class="line">                    for ( match in context ) &#123;</span><br><span class="line">                        // jquery是否有对应的方法， 如html。直接函数调用</span><br><span class="line">                        if ( jQuery.isFunction( this[ match ] ) ) &#123;</span><br><span class="line">                            this[ match ]( context[ match ] );</span><br><span class="line"></span><br><span class="line">                        // 其他都作为属性</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            this.attr( match, context[ match ] );</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                return this;</span><br><span class="line"></span><br><span class="line">            // id选择器进入这里</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                elem = document.getElementById( match[2] );</span><br><span class="line">                // 确保节点存在，   </span><br><span class="line">                // 在clone时,某种情况下即使删除了节点也会存在</span><br><span class="line">                // 因此必须在判断下是否有父节点</span><br><span class="line">                if ( elem &amp;&amp; elem.parentNode ) &#123;</span><br><span class="line">                    this.length = 1;</span><br><span class="line">                    this[0] = elem;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                this.context = document;</span><br><span class="line">                this.selector = selector;</span><br><span class="line">                return this;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        // 处理: $(expr, $(...))</span><br><span class="line">        &#125; else if ( !context || context.jquery ) &#123;</span><br><span class="line">            return ( context || rootjQuery ).find( selector );</span><br><span class="line">        // 处理: $(expr, context)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return this.constructor( context ).find( selector );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    // 处理节点 如$(this) $(document)</span><br><span class="line">    &#125; else if ( selector.nodeType ) &#123;</span><br><span class="line">        this.context = this[0] = selector;</span><br><span class="line">        this.length = 1;</span><br><span class="line">        return this;</span><br><span class="line"></span><br><span class="line">    // 处理函数形式如 $(function() &#123;&#125;)</span><br><span class="line">    // Shortcut for document ready</span><br><span class="line">    &#125; else if ( jQuery.isFunction( selector ) ) &#123;</span><br><span class="line">        return rootjQuery.ready( selector );</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理数组和对象 $([]) $(&#123;&#125;)</span><br><span class="line">    if ( selector.selector !== undefined ) &#123;</span><br><span class="line">        this.selector = selector.selector;</span><br><span class="line">        this.context = selector.context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return jQuery.makeArray( selector, this );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码库init-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">jQuery.parseHTML：</span><br><span class="line">var str = &apos;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;2&lt;/li&gt;&lt;li&gt;3&lt;/li&gt;&apos;</span><br><span class="line">var arr = jQuery.parseHTML(str, document, true); // [&apos;li&apos;, &apos;li&apos;, &apos;li&apos;]</span><br><span class="line">// flag 表示script标签是否可以填进来</span><br><span class="line">parseHTML(str, document, flag)</span><br><span class="line">var src = &apos;&lt;script&gt;alert(1)&lt;\/script&gt;&apos;</span><br><span class="line">jQuery.parseHTML(str, document, false) // 添加失败</span><br><span class="line">jQuery.parseHTML(str, document, true) // 添加成功</span><br><span class="line"></span><br><span class="line">jQuery.merge：</span><br><span class="line">var arr = [&apos;a&apos;, &apos;b&apos;]</span><br><span class="line">var arr2 = [&apos;c&apos;, &apos;d&apos;]</span><br><span class="line"></span><br><span class="line">console.log($.merge(arr, arr2)) // [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;]</span><br><span class="line">对我们对外就是这么使用的合并数组</span><br><span class="line"></span><br><span class="line">在内部可以合并特殊的json形式，即类数组</span><br><span class="line">var arr3 = &#123;</span><br><span class="line">    0: &apos;1&apos;,</span><br><span class="line">    1: &apos;v&apos;,</span><br><span class="line">    length: 2</span><br><span class="line">&#125;</span><br><span class="line">$.merge(arr3, arr2) </span><br><span class="line">//  &#123;</span><br><span class="line">    0: &apos;1&apos;,</span><br><span class="line">    1: &apos;v&apos;,</span><br><span class="line">    2：&apos;c&apos;,</span><br><span class="line">    3: &apos;d&apos;,</span><br><span class="line">    length: 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="selector和length"><a href="#selector和length" class="headerlink" title="selector和length"></a>selector和length</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">selector: &quot;&quot;, // 用于保存选择器</span><br><span class="line">length: 0, // 记录节点长度</span><br></pre></td></tr></table></figure>
-<h2 id="一些方法"><a href="#一些方法" class="headerlink" title="一些方法"></a>一些方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">// 转数组（将节点类数组对象转换为数组）</span><br><span class="line">toArray: function() &#123;</span><br><span class="line">    return core_slice.call( this );</span><br><span class="line">&#125;,</span><br><span class="line">// 转原生集合（）</span><br><span class="line">get: function( num ) &#123;</span><br><span class="line">    return num == null ?</span><br><span class="line">    // 不传参，则返回整个数组</span><br><span class="line">    this.toArray() :</span><br><span class="line">    // 如果参数大于0，则从前往后数，参数小于0则从后往前数，返回指定的元素</span><br><span class="line">    ( num &lt; 0 ? this[ this.length + num ] : this[ num ] );</span><br><span class="line">&#125;,</span><br><span class="line">//JQ对象的入栈（ 源码内部使用比较多）先进后出</span><br><span class="line">pushStack: function( elems ) &#123;</span><br><span class="line"></span><br><span class="line">    var ret = jQuery.merge( this.constructor(), elems );</span><br><span class="line">    // 和end方法公用，回溯上一层，链式调用</span><br><span class="line">    ret.prevObject = this;</span><br><span class="line">    ret.context = this.context;</span><br><span class="line"></span><br><span class="line">    return ret;</span><br><span class="line">&#125;,</span><br><span class="line">// 例如demo: $(div).pushStack($(span)).css().end().css();</span><br><span class="line">end: function() &#123;</span><br><span class="line">    return this.prevObject || this.constructor(null);</span><br><span class="line">&#125;,</span><br><span class="line">// 切割字符串  也使用入栈方法，这样就也可以配合end链式调用；</span><br><span class="line">// 之后用到pushStack都是同理</span><br><span class="line">slice: function() &#123;</span><br><span class="line">    return this.pushStack( core_slice.apply( this, arguments ) );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历  调用jQuery下的工具方法each实现</span><br><span class="line">each: function( callback, args ) &#123;</span><br><span class="line">    return jQuery.each( this, callback, args );</span><br><span class="line">&#125;,</span><br><span class="line">// dom加载回调函数</span><br><span class="line">ready: function( fn ) &#123;</span><br><span class="line">    jQuery.ready.promise().done( fn );</span><br><span class="line"></span><br><span class="line">    return this;</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的第一项</span><br><span class="line">first: function() &#123;</span><br><span class="line">    return this.eq( 0 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的最后一项</span><br><span class="line">last: function() &#123;</span><br><span class="line">    return this.eq( -1 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的指定项</span><br><span class="line">eq: function( i ) &#123;</span><br><span class="line">    var len = this.length,</span><br><span class="line">        j = +i + ( i &lt; 0 ? len : 0 );</span><br><span class="line">    return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[j] ] : [] );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历</span><br><span class="line">map: function( callback ) &#123;</span><br><span class="line">    return this.pushStack( jQuery.map(this, function( elem, i ) &#123;</span><br><span class="line">        return callback.call( elem, i, elem );</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="一些方法"><a href="#一些方法" class="headerlink" title="一些方法"></a>一些方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">// 转数组（将节点类数组对象转换为数组）</span><br><span class="line">toArray: function() &#123;</span><br><span class="line">    return core_slice.call( this );</span><br><span class="line">&#125;,</span><br><span class="line">// 转原生集合（）</span><br><span class="line">get: function( num ) &#123;</span><br><span class="line">    return num == null ?</span><br><span class="line">    // 不传参，则返回整个数组</span><br><span class="line">    this.toArray() :</span><br><span class="line">    // 如果参数大于0，则从前往后数，参数小于0则从后往前数，返回指定的元素</span><br><span class="line">    ( num &lt; 0 ? this[ this.length + num ] : this[ num ] );</span><br><span class="line">&#125;,</span><br><span class="line">//JQ对象的入栈（ 源码内部使用比较多）先进后出</span><br><span class="line">pushStack: function( elems ) &#123;</span><br><span class="line"></span><br><span class="line">    var ret = jQuery.merge( this.constructor(), elems );</span><br><span class="line">    // 和end方法公用，回溯上一层，链式调用</span><br><span class="line">    ret.prevObject = this;</span><br><span class="line">    ret.context = this.context;</span><br><span class="line"></span><br><span class="line">    return ret;</span><br><span class="line">&#125;,</span><br><span class="line">// 例如demo: $(div).pushStack($(span)).css().end().css();</span><br><span class="line">end: function() &#123;</span><br><span class="line">    return this.prevObject || this.constructor(null);</span><br><span class="line">&#125;,</span><br><span class="line">// 切割字符串  也使用入栈方法，这样就也可以配合end链式调用；</span><br><span class="line">// 之后用到pushStack都是同理</span><br><span class="line">slice: function() &#123;</span><br><span class="line">    return this.pushStack( core_slice.apply( this, arguments ) );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历  调用jQuery下的工具方法each实现</span><br><span class="line">each: function( callback, args ) &#123;</span><br><span class="line">    return jQuery.each( this, callback, args );</span><br><span class="line">&#125;,</span><br><span class="line">// dom加载回调函数</span><br><span class="line">ready: function( fn ) &#123;</span><br><span class="line">    jQuery.ready.promise().done( fn );</span><br><span class="line"></span><br><span class="line">    return this;</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的第一项</span><br><span class="line">first: function() &#123;</span><br><span class="line">    return this.eq( 0 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的最后一项</span><br><span class="line">last: function() &#123;</span><br><span class="line">    return this.eq( -1 );</span><br><span class="line">&#125;,</span><br><span class="line">// 找集合中的指定项</span><br><span class="line">eq: function( i ) &#123;</span><br><span class="line">    var len = this.length,</span><br><span class="line">        j = +i + ( i &lt; 0 ? len : 0 );</span><br><span class="line">    return this.pushStack( j &gt;= 0 &amp;&amp; j &lt; len ? [ this[j] ] : [] );</span><br><span class="line">&#125;,</span><br><span class="line">// 遍历</span><br><span class="line">map: function( callback ) &#123;</span><br><span class="line">    return this.pushStack( jQuery.map(this, function( elem, i ) &#123;</span><br><span class="line">        return callback.call( elem, i, elem );</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">push: core_push,</span><br><span class="line">sort: [].sort,</span><br><span class="line">splice: [].splice</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1215,584 +1916,6 @@ parent /deep/ child {}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/21/YD-JS-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/21/YD-JS-5/" itemprop="url">你不知道的JS系列（五）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T22:58:34+08:00">
-                2018-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.js本身是不支持异步的机制的，只是浏览器解析制作的<br>2.异步最常见的就是回调函数，这边就需要理解一下事件轮询和队列；<br>所谓的事件轮询就是把到该运行该语句的时候，把该语句push到事件轮询机制里，<br>事件轮询按照先后顺序就行运行,所以使用settimeout()并不能十分精确地计时，<br>因为如果时间到了，事件轮询队列里还有其他待运行的，那么运行时间就会出现偏差。<br>3.generator(迭代器) 一个可以按照想要的顺序进行执行语句<br>迭代器写法：function <em>name() {}<br>通过在迭代器内部写yield来做语句运行的截止点<br>通过next来启用程序<br>以下为demo: </em>foo迭代器，it1和it2是迭代器实例（一开始是不会运行的，只有当next才会运行）,<br>yield可以喝语句进行互动，yeild后面的字段会被next()运行停止后解析;(形成互动)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function *foo() &#123;</span><br><span class="line">	var x = yield 2;</span><br><span class="line">	z++;</span><br><span class="line">	var y = yield (x * z);</span><br><span class="line">	console.log( x, y, z );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var z = 1;</span><br><span class="line"></span><br><span class="line">var it1 = foo();</span><br><span class="line">var it2 = foo();</span><br><span class="line"></span><br><span class="line">var val1 = it1.next().value;			// 2 &lt;-- 让出2</span><br><span class="line">var val2 = it2.next().value;			// 2 &lt;-- 让出2</span><br><span class="line"></span><br><span class="line">val1 = it1.next( val2 * 10 ).value;		// 40  &lt;-- x:20,  z:2</span><br><span class="line">val2 = it2.next( val1 * 5 ).value;		// 600 &lt;-- x:200, z:3</span><br><span class="line"></span><br><span class="line">it1.next( val2 / 2 );					// y:300</span><br><span class="line">										// 20 300 3</span><br><span class="line">it2.next( val1 / 4 );					// y:10</span><br><span class="line">										// 200 10 3</span><br></pre></td></tr></table></figure></p>
-<p>另外可通过[Symbol.iterator]制造迭代器<br>var a = [1,3,5,7,9];</p>
-<p>var it = a<a href="">Symbol.iterator</a>;</p>
-<p>it.next().value;    // 1<br>it.next().value;    // 3<br>it.next().value;    // 5<br>..</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/21/YD-JS-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/21/YD-JS-4/" itemprop="url">你不知道的JS系列（四）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T22:55:39+08:00">
-                2018-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一、this判定"><a href="#一、this判定" class="headerlink" title="一、this判定"></a>一、this判定</h1><p>现在，我们可以按照优先顺序来总结一下从函数调用的调用点来判定 this 的规则了。按照这个顺序来问问题，然后在第一个规则适用的地方停下。</p>
-<p>1.函数是通过 new 被调用的吗（new 绑定）？如果是，this 就是新构建的对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bar = new foo()</span><br></pre></td></tr></table></figure></p>
-<p>2.函数是通过 call 或 apply 被调用（明确绑定），甚至是隐藏在 bind 硬绑定 之中吗？如果是，this 就是那个被明确指定的对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bar = foo.call( obj2 )</span><br></pre></td></tr></table></figure></p>
-<p>3.函数是通过环境对象（也称为拥有者或容器对象）被调用的吗（隐含绑定）？如果是，this 就是那个环境对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bar = obj1.foo()</span><br></pre></td></tr></table></figure></p>
-<p>4.否则，使用默认的 this（默认绑定）。如果在 strict mode 下，就是 undefined，否则是 global 对象。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bar = foo()</span><br></pre></td></tr></table></figure></p>
-<p>以上，就是理解对于普通的函数调用来说的 this 绑定规则 所需的全部。是的……几乎是全部。</p>
-<p>ps:<br>如果你传递 null 或 undefined 作为 call、apply 或 bind 的 this 绑定参数，那么这些值会被忽略掉，取而代之的是 默认绑定 规则将适用于这个调用。</p>
-<h1 id="二、闭包的定义"><a href="#二、闭包的定义" class="headerlink" title="二、闭包的定义"></a>二、闭包的定义</h1><p>闭包就是函数能够记住并访问它的词法作用域，即使当这个函数在它的词法作用域之外执行时。<br>通俗点：无论何时何地 只要你将函数作为头等的值看待并将它们传来传去的话，你就可能看到这些函数行使闭包。<br>计时器、事件处理器、Ajax请求、跨窗口消息、web worker、或者任何其他的异步（或同步！）任务，当你传入一个 回调函数，你就在它周围悬挂了一些闭包！<br>另外模块也是闭包的表现形式：ES6，AMD，CMD模式都一样。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/14/canvas-time/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/14/canvas-time/" itemprop="url">canvas-时间</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T22:47:20+08:00">
-                2018-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/canvas/" itemprop="url" rel="index">
-                    <span itemprop="name">canvas</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="这是一个canvas制作的数字时间表"><a href="#这是一个canvas制作的数字时间表" class="headerlink" title="这是一个canvas制作的数字时间表"></a>这是一个canvas制作的数字时间表</h1><p>比较简单只是用于练习canvas API<br>点这里看<a href="https://github.com/DanielDemi/base-demos" target="_blank" rel="noopener">源码</a></p>
-<iframe src="http://danieldemi.com/base-demos/canvas/time" width="800" height="250" frameborder="0" scrolling="0"></iframe>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DanielDemi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DanielDemi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/YD-JS-3/" itemprop="url">你不知道的JS系列（三）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:37:39+08:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="parseInt-1-0-19-答案是18；是不是很神奇？"><a href="#parseInt-1-0-19-答案是18；是不是很神奇？" class="headerlink" title="parseInt(1/0, 19) 答案是18；是不是很神奇？"></a>parseInt(1/0, 19) 答案是18；是不是很神奇？</h2><p>想要了解这个答案，那么就需要了解parseInt这个函数了。<br>parseInt如果传入的是非字符串，那么首先会解析为字符串。<br>1/0被解析为‘Infinity’.<br>那么parseInt(1/0, 19)就变成了parseInt(‘Infinity’, 19)。<br>那么答案就是18了，是不是很神奇</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1847,7 +1970,7 @@ parent /deep/ child {}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1858,7 +1981,7 @@ parent /deep/ child {}
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1869,7 +1992,7 @@ parent /deep/ child {}
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
