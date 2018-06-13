@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://danieldemi.com/2018/06/11/websocket/</loc>
+    <lastmod>2018-06-13T14:50:50.668Z</lastmod>
+    <data>
+        <display>
+        <title>websock(AMQ)通信-前端</title>
+        <pubTime>2018-06-11T14:30:28.000Z</pubTime>
+        
+        <tag>websocket</tag>
+         
+         
+           
+             
+              <breadCrumb title="websocket" url="http://danieldemi.com/categories/websocket/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
     <lastmod>2018-06-13T14:45:44.885Z</lastmod>
     <data>
@@ -17,26 +37,6 @@
            
              
               <breadCrumb title="jquery" url="http://danieldemi.com/categories/jquery/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://danieldemi.com/2018/06/11/websocket/</loc>
-    <lastmod>2018-06-11T15:11:39.895Z</lastmod>
-    <data>
-        <display>
-        <title>websock(AMQ)通信-前端</title>
-        <pubTime>2018-06-11T14:30:28.000Z</pubTime>
-        
-        <tag>websocket</tag>
-         
-         
-           
-             
-              <breadCrumb title="websocket" url="http://danieldemi.com/categories/websocket/"/>
           
         </display>
     </data>
