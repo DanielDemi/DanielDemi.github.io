@@ -696,7 +696,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-2/">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
@@ -715,7 +715,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
+                <a class="post-title-link" href="/2018/05/12/YD-JS-1/" itemprop="url">你不知道的JS系列（一）</a></h1>
         
 
         <div class="post-meta">
@@ -789,13 +789,12 @@
       
         
           
-            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
-<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
-<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
-<p>综上已解释了1.toString()为什么会报错的原因</p>
+            <h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure>
+<p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p>
+<p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>
 
           
         
@@ -986,7 +985,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-1/">
+    <link itemprop="mainEntityOfPage" href="http://danieldemi.com/2018/05/12/YD-JS-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DanielDemi">
@@ -1005,7 +1004,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/12/YD-JS-1/" itemprop="url">你不知道的JS系列（一）</a></h1>
+                <a class="post-title-link" href="/2018/05/12/YD-JS-2/" itemprop="url">你不知道的JS系列（二）</a></h1>
         
 
         <div class="post-meta">
@@ -1079,12 +1078,13 @@
       
         
           
-            <h2 id="在函数中为什么这样调用-slice-call-arguments"><a href="#在函数中为什么这样调用-slice-call-arguments" class="headerlink" title="在函数中为什么这样调用[].slice.call(arguments)?"></a>在函数中为什么这样调用[].slice.call(arguments)?</h2><p>先来看一段代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(params) &#123;</span><br><span class="line">    console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>(1) // 输出为[1]</span><br></pre></td></tr></table></figure>
-<p>从这边看出arguments不就是一个数组吗？<br>那么我们来看一下下面代码，一般来如果参数不是arguments,<br>而是普通的数组的话，那么下面这段代码arguments参数上。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(arguments) === arguments.slice() ？ // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>js中的arguments参数是一个类数组对象，它并不具有数组的方法，所以需要通过call来引用其方法。<br>至此问题已经解决了。</p>
-<p>// ps 可以通过测试测试arguments的type是否为Array来验证下<br>另外补充一个小知识点arguments类数组对象里有个方法叫callee，该方法就是为该函数本身，可用于迭代循环调用</p>
+            <h2 id="1-toSring-1-toFixed-3-等这些为什么执行会报错？"><a href="#1-toSring-1-toFixed-3-等这些为什么执行会报错？" class="headerlink" title="1.toSring()/1.toFixed(3)等这些为什么执行会报错？"></a>1.toSring()/1.toFixed(3)等这些为什么执行会报错？</h2><p>想要知道为什么，那么首先我们就必须清楚number这一类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 4</span><br><span class="line">b = 4.0</span><br><span class="line">c = 4.</span><br></pre></td></tr></table></figure>
+<p>这三个都可以表示为数字4<br>所以1.toString()的问题出在1.的解析上面;<br>再如下代码应该会清楚点了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.toSring() // 报错</span><br><span class="line">a = 1</span><br><span class="line">a.toString() // <span class="string">"1"</span></span><br><span class="line">1.1.toString() // <span class="string">"1.1"</span></span><br></pre></td></tr></table></figure>
+<p>从上可以看出并不是数字就无法.toString的。仅仅是因为整数的原因。因为4.就可以代码4<br>所以在1.toString的时候首先会解析1.为1因此就少了操作符号.（其实就是js解析方式的问题）。因此就会报错<br>那么可以通过如下方式来解决这个问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1..toString() // <span class="string">"1"</span></span><br><span class="line">(1).toString() // <span class="string">"1"</span></span><br><span class="line">1 .tiString() // <span class="string">"1"</span></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+<p>综上已解释了1.toString()为什么会报错的原因</p>
 
           
         
