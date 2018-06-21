@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
+    <lastmod>2018-06-21T14:51:07.184Z</lastmod>
+    <data>
+        <display>
+        <title>学习jquery源码-5 （jquery-2.0.3）（不兼容ie6,7,8）</title>
+        <pubTime>2018-05-27T07:29:14.000Z</pubTime>
+        
+        <tag>jquery</tag>
+         
+         
+           
+             
+              <breadCrumb title="jquery" url="http://danieldemi.com/categories/jquery/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://danieldemi.com/2018/06/21/loading/</loc>
-    <lastmod>2018-06-21T13:17:12.486Z</lastmod>
+    <lastmod>2018-06-21T13:28:05.787Z</lastmod>
     <data>
         <display>
         <title>loading</title>
@@ -37,26 +57,6 @@
            
              
               <breadCrumb title="websocket" url="http://danieldemi.com/categories/websocket/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
-    <lastmod>2018-06-13T14:45:44.885Z</lastmod>
-    <data>
-        <display>
-        <title>学习jquery源码-5 （jquery-2.0.3）（不兼容ie6,7,8）</title>
-        <pubTime>2018-05-27T07:29:14.000Z</pubTime>
-        
-        <tag>jquery</tag>
-         
-         
-           
-             
-              <breadCrumb title="jquery" url="http://danieldemi.com/categories/jquery/"/>
           
         </display>
     </data>
