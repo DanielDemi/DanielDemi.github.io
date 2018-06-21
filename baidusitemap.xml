@@ -3,6 +3,27 @@
 
 
     
+    
+  <url>
+    <loc>http://danieldemi.com/2018/06/21/loading/</loc>
+    <lastmod>2018-06-21T15:04:47.544Z</lastmod>
+    <data>
+        <display>
+        <title>loading</title>
+        <pubTime>2018-06-21T13:16:09.000Z</pubTime>
+        
+        <tag>demo</tag>
+         
+         
+           
+             
+              <breadCrumb title="demo" url="http://danieldemi.com/categories/demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://danieldemi.com/2018/05/27/learn-jquery-5/</loc>
     <lastmod>2018-06-21T14:51:07.184Z</lastmod>
@@ -17,26 +38,6 @@
            
              
               <breadCrumb title="jquery" url="http://danieldemi.com/categories/jquery/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://danieldemi.com/2018/06/21/loading/</loc>
-    <lastmod>2018-06-21T13:28:05.787Z</lastmod>
-    <data>
-        <display>
-        <title>loading</title>
-        <pubTime>2018-06-21T13:16:09.000Z</pubTime>
-        
-        <tag>loading</tag>
-         
-         
-           
-             
-              <breadCrumb title="loading" url="http://danieldemi.com/categories/loading/"/>
           
         </display>
     </data>
@@ -322,7 +323,6 @@
     </data>
     </url>
 
-    
     
     
     

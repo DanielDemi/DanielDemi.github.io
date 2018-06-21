@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://danieldemi.com/"/>
-  <updated>2018-06-21T13:28:05.787Z</updated>
+  <updated>2018-06-21T15:04:47.544Z</updated>
   <id>http://danieldemi.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://danieldemi.com/2018/06/21/loading/"/>
     <id>http://danieldemi.com/2018/06/21/loading/</id>
     <published>2018-06-21T13:16:09.000Z</published>
-    <updated>2018-06-21T13:28:05.787Z</updated>
+    <updated>2018-06-21T15:04:47.544Z</updated>
     
     <content type="html"><![CDATA[<h1 id="这是一个效果还好的loading"><a href="#这是一个效果还好的loading" class="headerlink" title="这是一个效果还好的loading"></a>这是一个效果还好的loading</h1><p>点这里看<a href="https://github.com/DanielDemi/base-demos" target="_blank" rel="noopener">源码</a></p><iframe src="http://danieldemi.com/base-demos/loading/loading-1" width="600" height="250" frameborder="0" scrolling="0"></iframe>]]></content>
     
@@ -34,10 +34,10 @@
     
     </summary>
     
-      <category term="loading" scheme="http://danieldemi.com/categories/loading/"/>
+      <category term="demo" scheme="http://danieldemi.com/categories/demo/"/>
     
     
-      <category term="loading" scheme="http://danieldemi.com/tags/loading/"/>
+      <category term="demo" scheme="http://danieldemi.com/tags/demo/"/>
     
   </entry>
   
